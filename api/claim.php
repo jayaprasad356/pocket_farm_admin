@@ -78,7 +78,7 @@ if (empty($plan)) {
 $daily_income = $plan[0]['daily_income'];
 
 
-$sql = "UPDATE user_plan SET claim = 0 WHERE plan_id = $plan_id AND user_id = $user_id";
+$sql = "UPDATE user_plan SET claim = 0,income = $daily_income WHERE plan_id = $plan_id AND user_id = $user_id";
 $db->sql($sql);
 
 $sql = "UPDATE users SET balance = balance + $daily_income, today_income = today_income + $daily_income, total_income = total_income + $daily_income WHERE id = $user_id";
