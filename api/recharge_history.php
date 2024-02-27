@@ -12,7 +12,14 @@ include_once('../includes/crud.php');
 $db = new Database();
 $db->connect();
 
-$sql = "SELECT * FROM recharge ORDER BY datetime DESC"; 
+if (empty($_POST['user_id'])) {
+    $response['success'] = false;
+    $response['message'] = "User Id is Empty";
+    print_r(json_encode($response));
+    return false;
+}
+$user_id = $db->escapeString($_POST['user_id']);
+$sql = "SELECT * FROM recharge WHERE user_id = $user_id ORDER BY datetime DESC"; 
 $db->sql($sql);
 $res = $db->getResult();
 $num = $db->numRows($res);
