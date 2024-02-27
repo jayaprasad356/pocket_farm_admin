@@ -34,7 +34,7 @@ if (empty($_POST['plan_id'])) {
 $user_id = $db->escapeString($_POST['user_id']);
 $plan_id = $db->escapeString($_POST['plan_id']);
 
-$sql = "SELECT id,referred_by FROM users WHERE id = $user_id";
+$sql = "SELECT id,referred_by,c_referred_by,d_referred_by FROM users WHERE id = $user_id";
 $db->sql($sql);
 $user = $db->getResult();
 
@@ -45,6 +45,8 @@ if (empty($user)) {
     return;
 }
 $referred_by = $user[0]['referred_by'];
+$c_referred_by = $user[0]['c_referred_by'];
+$d_referred_by = $user[0]['d_referred_by'];
 $sql = "SELECT * FROM user_plan WHERE user_id = $user_id AND plan_id = $plan_id";
 $db->sql($sql);
 $user_plan = $db->getResult();
@@ -74,7 +76,7 @@ if (empty($plan)) {
     return;
 }
 $daily_income = $plan[0]['daily_income'];
-$ten_percent = $daily_income * 0.1;
+
 
 $sql = "UPDATE user_plan SET claim = 0 WHERE plan_id = $plan_id AND user_id = $user_id";
 $db->sql($sql);
@@ -92,9 +94,42 @@ $num = $db->numRows($res);
 
 if ($num == 1){
     $refer_id = $res[0]['id'];
-    $sql = "UPDATE users SET balance = balance + $ten_percent, today_income = today_income + $ten_percent, total_income = total_income + $ten_percent WHERE id  = $refer_id";
+    $level_income = $daily_income * 0.1;
+    $sql = "UPDATE users SET balance = balance + $level_income, today_income = today_income + $level_income, total_income = total_income + $level_income WHERE id  = $refer_id";
     $db->sql($sql);
-    $sql_insert_transaction = "INSERT INTO transactions (`user_id`, `amount`, `datetime`, `type`) VALUES ('$refer_id', '$daily_income', '$datetime', 'level_income')";
+    $sql_insert_transaction = "INSERT INTO transactions (`user_id`, `amount`, `datetime`, `type`) VALUES ('$refer_id', '$level_income', '$datetime', 'level_income')";
+    $db->sql($sql_insert_transaction);
+    
+
+}
+
+$sql = "SELECT id FROM users WHERE refer_code = '$c_referred_by'";
+$db->sql($sql);
+$res= $db->getResult();
+$num = $db->numRows($res);
+
+if ($num == 1){
+    $refer_id = $res[0]['id'];
+    $level_income = $daily_income * 0.05;
+    $sql = "UPDATE users SET balance = balance + $level_income, today_income = today_income + $level_income, total_income = total_income + $level_income WHERE id  = $refer_id";
+    $db->sql($sql);
+    $sql_insert_transaction = "INSERT INTO transactions (`user_id`, `amount`, `datetime`, `type`) VALUES ('$refer_id', '$level_income', '$datetime', 'level_income')";
+    $db->sql($sql_insert_transaction);
+    
+
+}
+
+$sql = "SELECT id FROM users WHERE refer_code = '$d_referred_by'";
+$db->sql($sql);
+$res= $db->getResult();
+$num = $db->numRows($res);
+
+if ($num == 1){
+    $refer_id = $res[0]['id'];
+    $level_income = $daily_income * 0.03;
+    $sql = "UPDATE users SET balance = balance + $level_income, today_income = today_income + $level_income, total_income = total_income + $level_income WHERE id  = $refer_id";
+    $db->sql($sql);
+    $sql_insert_transaction = "INSERT INTO transactions (`user_id`, `amount`, `datetime`, `type`) VALUES ('$refer_id', '$level_income', '$datetime', 'level_income')";
     $db->sql($sql_insert_transaction);
     
 
