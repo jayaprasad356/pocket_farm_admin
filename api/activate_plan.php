@@ -94,7 +94,7 @@ if (!empty($res1)) {
     $t_products = $res1[0]['products'];
 }
 
-$sql_check = "SELECT * FROM user_plan up LEFT JOIN `users` u ON up.user_id = u.id WHERE up.referred_by = '$referred_by' AND up.plan_id = $t_plan_id";
+$sql_check = "SELECT * FROM user_plan up LEFT JOIN `users` u ON up.user_id = u.id WHERE u.referred_by = '$referred_by' AND up.plan_id = $t_plan_id";
 $db->sql($sql_check);
 $res_check_user = $db->getResult();
 $num = $db->numRows($res_check_user);
