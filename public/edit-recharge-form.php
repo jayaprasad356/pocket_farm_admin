@@ -80,14 +80,17 @@ $result = $db->getResult();
                         <div class="row">
                             <div class="form-group">
                                 <div class="col-md-8">
-                                    <label for="exampleInputFile">Image</label> <i class="text-danger asterik">*</i><?php echo isset($error['image']) ? $error['image'] : ''; ?>
+                                    
                                     
                                     <img id="blah" src="<?php echo $res[0]['image']; ?>" alt="" width="150" height="200" <?php echo empty($res[0]['image']) ? 'style="display: none;"' : ''; ?> />
                                 </div>
                             </div>   
                         </div>
                         <br>
-                        <div class="form-group col-md-4">
+
+                    </div>
+                    <div class="row">
+                    <div class="form-group col-md-4">
                                     <label class="control-label">Status</label><i class="text-danger asterik">*</i><br>
                                     <div id="status" class="btn-group">
                                         <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
