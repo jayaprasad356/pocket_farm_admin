@@ -139,6 +139,6 @@ if ($num == 1){
 
 
 $response['success'] = true;
-$response['message'] = "Claim Updated Successfully";
+$response['message'] = "Sold Successfully";
 echo json_encode($response);
 ?>
