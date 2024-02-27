@@ -19,9 +19,9 @@ class Database
 
      //live
     private $db_host = "localhost";  // Change as required
-    private $db_user = "u743445510_we_agri";  // Change as required
-    private $db_pass = "We_agri@2023";  // Change as required
-    private $db_name = "u743445510_we_agri"; 
+    private $db_user = "u743445510_pocketfarm";  // Change as required
+    private $db_pass = "Pocketfarm@0111";  // Change as required
+    private $db_name = "u743445510_pocketfarm"; 
 
 
    //  private $db_host = "localhost";  // Change as required
