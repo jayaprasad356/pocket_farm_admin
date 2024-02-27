@@ -502,9 +502,9 @@ foreach ($res as $row) {
         }
         $tempRow['recharge_amount'] = $row['recharge_amount'];
         if($row['status']==1)
-        $tempRow['status'] ="<p class='text text-success'>Approved</p>";
+        $tempRow['status'] ="<p class='text text-success'>Verified</p>";
     elseif($row['status']==0)
-        $tempRow['status']="<p class='text text-danger'>Not-Approved</p>";
+        $tempRow['status']="<p class='text text-danger'>Pending</p>";
     else
         $tempRow['status']="<p class='text text-danger'>Cancelled</p>";
         $tempRow['operate'] = $operate;
