@@ -88,8 +88,7 @@ if ($amount >= $min_withdrawal) {
     
             $response['success'] = true;
             $response['message'] = "Withdrawal Requested Successfully.";
-            $response['data']['withdrawals'] = $withdrawals;
-            $response['data']['userDetails'] = $userDetails;
+            $response['data'] = $userDetails;
             print_r(json_encode($response));
         }
     } else {

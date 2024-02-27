@@ -1,16 +1,27 @@
 
 <?php
 
+$datetime = date('Y-m-d H:i:s');
 if (isset($_POST['btnCancel'])  && isset($_POST['enable'])) {
-       $sql="SELECT * FROM withdrawals WHERE id IN (".implode(',',$_POST['enable']).")";
-       $db->sql($sql);
-       $result = $db->getResult();
+    $sql="SELECT * FROM withdrawals WHERE id IN (".implode(',',$_POST['enable']).")";
+    $db->sql($sql);
+    $result = $db->getResult();
+    foreach ($result as $row) {
+        $amount=$row['amount'];
+        $user_id=$row['user_id'];
+        $sql = "UPDATE users SET balance= balance + $amount,total_withdrawal = total_withdrawal - $amount WHERE id = $row[user_id]";
+        $db->sql($sql);
+        $result = $db->getResult();
+
+        $sql = "INSERT INTO transactions (`user_id`, `amount`, `datetime`, `type`) VALUES ('$user_id', '$amount', '$datetime', 'cancelled')";
+        $db->sql($sql);
+    }
  
     for ($i = 0; $i < count($_POST['enable']); $i++) {
         $enable = $db->escapeString($fn->xss_clean($_POST['enable'][$i]));
         $sql = "UPDATE withdrawals SET status=2 WHERE id = $enable";
         $db->sql($sql);
-        $result = $db->getResult();
+
     }
 }
 
