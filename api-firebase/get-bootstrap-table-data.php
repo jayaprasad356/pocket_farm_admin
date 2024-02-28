@@ -482,7 +482,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'recharge') {
         $total = $row['total'];
     }
 
-    $sql = "SELECT l.id AS id, l.*, u.name FROM `recharge` l " . $join . " ORDER BY $sort $order LIMIT $offset, $limit";
+    $sql = "SELECT l.id AS id, l.*, u.name,u.mobile FROM `recharge` l " . $join . " ORDER BY $sort $order LIMIT $offset, $limit";
     $db->sql($sql);
     $res = $db->getResult();
 
@@ -495,6 +495,7 @@ foreach ($res as $row) {
         $operate .= ' <a class="text text-danger" href="delete-recharge.php?id=' . $row['id'] . '"><i class="fa fa-trash"></i>Delete</a>';
         $tempRow['id'] = $row['id'];
         $tempRow['name'] = $row['name'];
+        $tempRow['mobile'] = $row['mobile'];
         if (!empty($row['image'])) {
             $tempRow['image'] = "<a data-lightbox='category' href='" . $row['image'] . "' data-caption='" . $row['image'] . "'><img src='" . $row['image'] . "' title='" . $row['image'] . "' height='50' /></a>";
         } else {
