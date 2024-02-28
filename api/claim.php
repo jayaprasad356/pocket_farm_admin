@@ -95,7 +95,7 @@ $num = $db->numRows($res);
 if ($num == 1){
     $refer_id = $res[0]['id'];
     $level_income = $daily_income * 0.1;
-    $sql = "UPDATE users SET balance = balance + $level_income, today_income = today_income + $level_income, total_income = total_income + $level_income WHERE id  = $refer_id";
+    $sql = "UPDATE users SET balance = balance + $level_income, today_income = today_income + $level_income, total_income = total_income + $level_income,`team_income` = `team_income` + $level_income WHERE id  = $refer_id";
     $db->sql($sql);
     $sql_insert_transaction = "INSERT INTO transactions (`user_id`, `amount`, `datetime`, `type`) VALUES ('$refer_id', '$level_income', '$datetime', 'level_income')";
     $db->sql($sql_insert_transaction);
@@ -111,7 +111,7 @@ $num = $db->numRows($res);
 if ($num == 1){
     $refer_id = $res[0]['id'];
     $level_income = $daily_income * 0.05;
-    $sql = "UPDATE users SET balance = balance + $level_income, today_income = today_income + $level_income, total_income = total_income + $level_income WHERE id  = $refer_id";
+    $sql = "UPDATE users SET balance = balance + $level_income, today_income = today_income + $level_income, total_income = total_income + $level_income,`team_income` = `team_income` + $level_income WHERE id  = $refer_id";
     $db->sql($sql);
     $sql_insert_transaction = "INSERT INTO transactions (`user_id`, `amount`, `datetime`, `type`) VALUES ('$refer_id', '$level_income', '$datetime', 'level_income')";
     $db->sql($sql_insert_transaction);
@@ -127,7 +127,7 @@ $num = $db->numRows($res);
 if ($num == 1){
     $refer_id = $res[0]['id'];
     $level_income = $daily_income * 0.03;
-    $sql = "UPDATE users SET balance = balance + $level_income, today_income = today_income + $level_income, total_income = total_income + $level_income WHERE id  = $refer_id";
+    $sql = "UPDATE users SET balance = balance + $level_income, today_income = today_income + $level_income, total_income = total_income + $level_income,`team_income` = `team_income` + $level_income WHERE id  = $refer_id";
     $db->sql($sql);
     $sql_insert_transaction = "INSERT INTO transactions (`user_id`, `amount`, `datetime`, `type`) VALUES ('$refer_id', '$level_income', '$datetime', 'level_income')";
     $db->sql($sql_insert_transaction);

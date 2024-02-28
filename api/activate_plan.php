@@ -137,7 +137,7 @@ if ($recharge >= $price) {
 
                 }
             }
-            $sql = "UPDATE `users` SET `balance` = `balance` + $invite_bonus,`today_income` = `today_income` + $invite_bonus,`total_income` = `total_income` + $invite_bonus  WHERE `refer_code` = '$referred_by'";
+            $sql = "UPDATE `users` SET `balance` = `balance` + $invite_bonus,`today_income` = `today_income` + $invite_bonus,`total_income` = `total_income` + $invite_bonus,`team_income` = `team_income` + $invite_bonus  WHERE `refer_code` = '$referred_by'";
             $db->sql($sql);
 
             $sql = "INSERT INTO transactions (`user_id`, `amount`, `datetime`, `type`) VALUES ('$r_id', '$invite_bonus', '$datetime', 'invite_bonus')";
