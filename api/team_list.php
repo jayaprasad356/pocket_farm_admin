@@ -56,7 +56,7 @@ if ($num >= 1) {
         }
     } 
     if ($level === 'c') {
-        $sql = "SELECT *,DATE(registered_datetime) AS registered_date,CONCAT(SUBSTRING(mobile, 1, 2), '******', SUBSTRING(mobile, LENGTH(mobile)-1, 2)) AS mobileFROM users WHERE c_referred_by = '$refer_code'";
+        $sql = "SELECT *,DATE(registered_datetime) AS registered_date,CONCAT(SUBSTRING(mobile, 1, 2), '******', SUBSTRING(mobile, LENGTH(mobile)-1, 2)) AS mobile FROM users WHERE c_referred_by = '$refer_code'";
         $db->sql($sql);
         $res = $db->getResult();
         $num = $db->numRows($res);
