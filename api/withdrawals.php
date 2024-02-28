@@ -58,12 +58,12 @@ $account_num = $res[0]['account_num'];
 
 
 
-// if (!isBetween10AMand6PM()) {
-//     $response['success'] = false;
-//     $response['message'] = "Withdrawal time morning 10:00AM to 6PM";
-//     print_r(json_encode($response));
-//     return false;
-// }
+if (!isBetween10AMand6PM()) {
+    $response['success'] = false;
+    $response['message'] = "Withdrawal time morning 10:00AM to 6PM";
+    print_r(json_encode($response));
+    return false;
+}
 if ($amount >= $min_withdrawal) {
     if ($amount <= $balance) {
         if ($account_num == '') {
