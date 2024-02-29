@@ -3,7 +3,7 @@ include_once('includes/functions.php');
 $function = new functions;
 include_once('includes/custom-functions.php');
 $fn = new custom_functions;
-
+date_default_timezone_set('Asia/Kolkata');
 ?>
 <?php
  $ID = $db->escapeString($_GET['id']);
