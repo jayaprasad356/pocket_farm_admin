@@ -22,4 +22,7 @@ $currentdate = date('Y-m-d');
 $sql = "UPDATE user_plan SET claim = 1 ";
 $db->sql($sql);
 
+$sql = "UPDATE users SET today_income = 0 ";
+$db->sql($sql);
+
 ?>
