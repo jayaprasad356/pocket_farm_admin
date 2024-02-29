@@ -17,10 +17,8 @@ if (isset($_POST['btnUpdate'])) {
     $status = $db->escapeString($_POST['status']);
     $sql = "UPDATE recharge SET recharge_amount='$recharge_amount',status = $status WHERE id = '$ID'";
     $db->sql($sql);
-
-    $sql = "UPDATE users SET recharge='$recharge_amount' WHERE id = '$ID'";
-    $db->sql($sql);
     $result = $db->getResult();
+
     if (!empty($result)) {
         $error['update_slide'] = " <span class='label label-danger'>Failed</span>";
     } else {
