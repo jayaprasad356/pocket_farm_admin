@@ -27,13 +27,15 @@
                                     <th  data-field="id" data-sortable="true">ID</th>
                                     <th  data-field="name" data-sortable="true">Name</th>
                                     <th  data-field="mobile" data-sortable="true">Mobile</th>
+                                    <th data-field="recharge" data-sortable="true">Recharge </th>
+                                    <th  data-field="total_recharge" data-sortable="true">Total Recharge</th>
                                     <th  data-field="email" data-sortable="true">Email</th>
                                     <th data-field="age" data-sortable="true">Age</th>
                                     <th  data-field="city" data-sortable="true">City</th>
                                     <th  data-field="state" data-sortable="true">State</th>
                                     <th data-field="refer_code" data-sortable="true">Refer Code</th>
                                     <th data-field="referred_by" data-sortable="true">Referred By</th>
-                                    <th data-field="recharge" data-sortable="true">Recharge </th>
+                     
                                     <th  data-field="balance" data-sortable="true">Balance</th>
                                     <th  data-field="total_income" data-sortable="true">Total Income</th>
                                     <th data-field="today_income" data-sortable="true">Today Income</th>
@@ -43,7 +45,7 @@
                                     <th  data-field="bank" data-sortable="true">Bank</th>
                                     <th data-field="branch" data-sortable="true">Branch</th>
                                     <th  data-field="ifsc" data-sortable="true">IFSC</th>
-                                    <th  data-field="total_recharge" data-sortable="true">Total Recharge</th>
+                                  
                                     <th data-field="team_size" data-sortable="true">Team Size</th>
                                     <th data-field="valid_team" data-sortable="true">Valid Team</th>
                                     <th data-field="total_assets" data-sortable="true">Total Assets</th>
