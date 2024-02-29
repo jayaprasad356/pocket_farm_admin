@@ -340,7 +340,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'transactions') {
     foreach ($res as $row)
         $total = $row['total'];
    
-     $sql = "SELECT l.id AS id,l.*,u.name,u.mobile  FROM `transactions` l " . $join . " ORDER BY $sort $order LIMIT $offset, $limit";
+     $sql = "SELECT l.id AS id,l.*,u.name,u.mobile,u.total_recharge  FROM `transactions` l " . $join . " ORDER BY $sort $order LIMIT $offset, $limit";
      $db->sql($sql);
      $res = $db->getResult();
 
@@ -355,7 +355,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'transactions') {
         $tempRow['mobile'] = $row['mobile'];
         $tempRow['type'] = $row['type'];
         $tempRow['amount'] = $row['amount'];
-        $tempRow['ads'] = $row['ads'];
+        $tempRow['total_recharge'] = $row['total_recharge'];
         $tempRow['datetime'] = $row['datetime'];
         
         $rows[] = $tempRow;
