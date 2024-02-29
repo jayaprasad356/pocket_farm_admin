@@ -27,7 +27,7 @@ $date = date('Y-m-d');
 function isBetween9AMand9PM() {
     $currentHour = date('H');
     $startTimestamp = strtotime('09:00:00');
-    $endTimestamp = strtotime('19:00:00');
+    $endTimestamp = strtotime('21:00:00');
     return ($currentHour >= date('H', $startTimestamp)) && ($currentHour < date('H', $endTimestamp));
 }
 if (!isBetween9AMand9PM()) {
