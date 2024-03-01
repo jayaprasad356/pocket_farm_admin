@@ -97,11 +97,11 @@ include "header.php";
                     <div class="small-box bg-blue">
                         <div class="inner">
                             <h3><?php
-                             $sql = "SELECT SUM(recharge_amount) AS recharge_amount  FROM recharge WHERE status = 0 ";
+                             $sql = "SELECT COUNT(id) AS count  FROM recharge WHERE status = 0 ";
                              $db->sql($sql);
                              $res = $db->getResult();
-                             $totalamount = $res[0]['recharge_amount'];
-                             echo "Rs.".$totalamount;
+                             $totalamount = $res[0]['count'];
+                             echo $totalamount;
                               ?></h3>
                             <p>Pending Recharge</p>
                         </div>
