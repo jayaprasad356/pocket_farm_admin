@@ -27,6 +27,10 @@
                                                 <?php } ?>
                                             </select> 
                                     </div>
+                                    <div class="col-md-2">
+                                      <h4 class="box-title">Filter by Date </h4>
+                                        <input type="date" class="form-control" id="date" name="date" value="<?php echo (isset($_GET['date'])) ? $_GET['date'] : "" ?>"></input>
+                                      </div>
                                 </div>
                     <div  class="box-body table-responsive">
                     <table id='users_table' class="table table-hover" data-toggle="table" data-url="api-firebase/get-bootstrap-table-data.php?table=transactions" data-page-list="[5, 10, 20, 50, 100, 200]" data-show-refresh="true" data-show-columns="true" data-side-pagination="server" data-pagination="true" data-search="true" data-trim-on-search="false" data-filter-control="true" data-query-params="queryParams" data-sort-name="id" data-sort-order="desc" data-show-export="false" data-export-types='["txt","excel"]' data-export-options='{
@@ -39,7 +43,7 @@
                                     <th  data-field="id" data-sortable="true">ID</th>
                                     <th  data-field="name" data-sortable="true"> Name</th>
                                     <th  data-field="mobile" data-sortable="true"> Mobile</th>
-                                    <th  data-field="total_recharge" data-sortable="true">Total recharge</th>
+                                    <th  data-field="ads" data-sortable="true">Ads</th>
                                     <th  data-field="amount" data-sortable="true">Amount</th>
                                     <th  data-field="type" data-sortable="true">Type</th>
                                     <th  data-field="datetime" data-sortable="true">DateTime</th>
@@ -61,12 +65,16 @@
     $('#type').on('change', function() {
         $('#users_table').bootstrapTable('refresh');
     });
+    $('#date').on('change', function() {
+        $('#users_table').bootstrapTable('refresh');
+    });
 
     function queryParams(p) {
         return {
             "type": $('#type').val(),
             "seller_id": $('#seller_id').val(),
             "community": $('#community').val(),
+            "date": $('#date').val(),
             limit: p.limit,
             sort: p.sort,
             order: p.order,

@@ -61,10 +61,33 @@ include "header.php";
                     </div>
                 </div>
                 <div class="col-lg-4 col-xs-6">
-                    <div class="small-box bg-orange">
+                    <div class="small-box bg-purple">
+                        <div class="inner">
+                        <?php
+                          $currentdate = date("Y-m-d"); // Get the current date
+                          $sql = "SELECT COUNT(id) AS total FROM users WHERE DATE(registered_datetime) = '$currentdate'";
+                          $db->sql($sql);
+                          $res = $db->getResult();
+                          $num = $res[0]['total']; // Fetch the count from the result
+                           ?>
+                          <h3><?php echo $num; ?></h3>
+                          <p>Today Registration </p>
+                          </div>
+                        
+                        <a href="users.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-xs-6">
+                    <div class="small-box bg-red">
                         <div class="inner">
                         <h3><?php
-                            $sql = "SELECT SUM(amount) AS amount FROM withdrawals WHERE status=0 ";
+                            $branch_id = (isset($_POST['branch_id']) && $_POST['branch_id']!='') ? $_POST['branch_id'] :"";
+                            if ($branch_id != '') {
+                                $join1="AND users.branch_id='$branch_id'";
+                            } else {
+                                $join1="";
+                            }
+                            $sql = "SELECT SUM(withdrawals.amount) AS amount,withdrawals.user_id,users.id FROM withdrawals,users WHERE withdrawals.user_id=users.id AND withdrawals.status=0 $join1";
                             $db->sql($sql);
                             $res = $db->getResult();
                             $totalamount = $res[0]['amount'];
@@ -77,10 +100,10 @@ include "header.php";
                     </div>
                 </div>
                 <div class="col-lg-4 col-xs-6">
-                    <div class="small-box bg-green">
+                    <div class="small-box bg-blue">
                         <div class="inner">
                             <h3><?php
-                             $sql = "SELECT SUM(recharge_amount) AS recharge_amount  FROM recharge WHERE status = 0 ";
+                             $sql = "SELECT SUM(recharge_amount) AS recharge_amount  FROM recharge WHERE recharge.status=0 ";
                              $db->sql($sql);
                              $res = $db->getResult();
                              $totalamount = $res[0]['recharge_amount'];
@@ -94,10 +117,10 @@ include "header.php";
                     </div>
                 </div>
                 <div class="col-lg-4 col-xs-6">
-                    <div class="small-box bg-yellow">
+                    <div class="small-box bg-green">
                         <div class="inner">
                             <h3><?php
-                             $sql = "SELECT SUM(recharge_amount) AS recharge_amount  FROM recharge WHERE status = 1 AND DATE(datetime) = '$date' ";
+                             $sql = "SELECT SUM(recharge_amount) AS recharge_amount  FROM recharge WHERE recharge.status=1 ";
                              $db->sql($sql);
                              $res = $db->getResult();
                              $totalamount = $res[0]['recharge_amount'];

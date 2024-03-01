@@ -80,15 +80,15 @@ $db->connect();
             if (isset($_GET['order'])){
                 $order = $db->escapeString($_GET['order']);
             }
-            $sql = "SELECT COUNT(`id`) as total FROM `users` ";
+            $sql = "SELECT COUNT(`id`) as total FROM `users`WHERE 1=1 " . $where;
             $db->sql($sql);
             $res = $db->getResult();
             foreach ($res as $row)
-                $total = $row['total'];
+             $total = $row['total'];
            
-                $sql = "SELECT * FROM users WHERE 1=1 " . $where . " ORDER BY " . $sort . " " . $order . " LIMIT " . $offset . ", " . $limit;
-                $db->sql($sql);
-                $res = $db->getResult();
+             $sql = "SELECT * FROM users WHERE 1=1 " . $where . " ORDER BY " . $sort . " " . $order . " LIMIT " . $offset . ", " . $limit;
+             $db->sql($sql);
+            $res = $db->getResult();
         
             $bulkData = array();
             $bulkData['total'] = $total;
@@ -97,8 +97,7 @@ $db->connect();
             $tempRow = array();
         
             foreach ($res as $row) {
-        
-                
+           
                 $operate = ' <a href="edit-users.php?id=' . $row['id'] . '"><i class="fa fa-edit"></i>Edit</a>';
                 $operate .= ' <a class="text text-danger" href="delete-users.php?id=' . $row['id'] . '"><i class="fa fa-trash"></i>Delete</a>';
                 $tempRow['id'] = $row['id'];
@@ -308,6 +307,12 @@ if (isset($_GET['table']) && $_GET['table'] == 'transactions') {
         $type = $db->escapeString($fn->xss_clean($_GET['type']));
         $where .= " AND l.type = '$type'";
     }
+
+    if (isset($_GET['date']) && $_GET['date'] != '') {
+        $selected_date = $db->escapeString($fn->xss_clean($_GET['date']));
+        $formatted_date = date('Y-m-d', strtotime($selected_date));
+        $where .= " AND DATE(l.datetime) = '$formatted_date'";
+    }
     if (isset($_GET['offset']))
         $offset = $db->escapeString($fn->xss_clean($_GET['offset']));
     if (isset($_GET['limit']))
@@ -340,7 +345,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'transactions') {
     foreach ($res as $row)
         $total = $row['total'];
    
-     $sql = "SELECT l.id AS id,l.*,u.name,u.mobile,u.total_recharge  FROM `transactions` l " . $join . " ORDER BY $sort $order LIMIT $offset, $limit";
+     $sql = "SELECT l.id AS id,l.*,u.name,u.mobile  FROM `transactions` l " . $join . " ORDER BY $sort $order LIMIT $offset, $limit";
      $db->sql($sql);
      $res = $db->getResult();
 
@@ -355,7 +360,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'transactions') {
         $tempRow['mobile'] = $row['mobile'];
         $tempRow['type'] = $row['type'];
         $tempRow['amount'] = $row['amount'];
-        $tempRow['total_recharge'] = $row['total_recharge'];
+        $tempRow['ads'] = $row['ads'];
         $tempRow['datetime'] = $row['datetime'];
         
         $rows[] = $tempRow;
@@ -393,7 +398,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'user_plan') {
 
         if (isset($_GET['search']) && !empty($_GET['search'])) {
             $search = $db->escapeString($_GET['search']);
-            $where .= " AND (u.id LIKE '%" . $search . "%' OR u.name LIKE '%" . $search . "%' OR p.products LIKE '%" . $search . "%')";
+            $where .= " AND (u.id LIKE '%" . $search . "%' OR u.name LIKE '%" . $search . "%' OR p.products LIKE '%" . $search . "%'  OR u.mobile LIKE '%" . $search . "%')";
         }
         $join = "LEFT JOIN `users` u ON l.user_id = u.id LEFT JOIN `plan` p ON l.plan_id = p.id WHERE l.id IS NOT NULL " . $where;
 
@@ -404,7 +409,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'user_plan') {
             $total = $row['total'];
         }
         
-        $sql = "SELECT l.id AS id, l.*, u.name AS user_name,u.total_recharge, u.mobile AS user_mobile, p.products AS plan_products, p.price AS plan_price, p.daily_quantity AS plan_daily_quantity, p.unit AS plan_unit, p.daily_income AS plan_daily_income, p.monthly_income AS plan_monthly_income, p.invite_bonus AS plan_invite_bonus FROM `user_plan` l " . $join . " ORDER BY $sort $order LIMIT $offset, $limit";
+        $sql = "SELECT l.id AS id, l.*, u.name AS user_name, u.mobile AS user_mobile, p.products AS plan_products, p.price AS plan_price, p.daily_quantity AS plan_daily_quantity, p.unit AS plan_unit, p.daily_income AS plan_daily_income, p.monthly_income AS plan_monthly_income, p.invite_bonus AS plan_invite_bonus FROM `user_plan` l " . $join . " ORDER BY $sort $order LIMIT $offset, $limit";
         $db->sql($sql);
         $res = $db->getResult();
         
@@ -422,7 +427,6 @@ if (isset($_GET['table']) && $_GET['table'] == 'user_plan') {
         $tempRow['id'] = $row['id'];
         $tempRow['user_name'] = $row['user_name'];
         $tempRow['user_mobile'] = $row['user_mobile'];
-        $tempRow['total_recharge'] = $row['total_recharge'];
         $tempRow['plan_products'] = $row['plan_products'];
         $tempRow['plan_price'] = $row['plan_price'];
         $tempRow['plan_daily_quantity'] = $row['plan_daily_quantity'];
