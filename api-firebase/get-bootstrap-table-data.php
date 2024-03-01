@@ -446,24 +446,23 @@ if (isset($_GET['table']) && $_GET['table'] == 'recharge') {
     $where = '';
     $sort = 'id';
     $order = 'DESC';
+
+    if (isset($_GET['status']) && $_GET['status'] != '') {
+        $status = $db->escapeString($fn->xss_clean($_GET['status']));
+        $where .= " AND l.status = '$status'";
+    }
+
+    if (isset($_GET['date']) && $_GET['date'] != '') {
+        $selected_date = $db->escapeString($fn->xss_clean($_GET['date']));
+        $formatted_date = date('Y-m-d', strtotime($selected_date));
+        $where .= " AND DATE(l.datetime) = '$formatted_date'";
+    }
+
     if (isset($_GET['offset']))
         $offset = $db->escapeString($fn->xss_clean($_GET['offset']));
     if (isset($_GET['limit']))
         $limit = $db->escapeString($fn->xss_clean($_GET['limit']));
 
-    if (isset($_GET['sort']))
-        $sort = $db->escapeString($fn->xss_clean($_GET['sort']));
-    if (isset($_GET['order']))
-        $order = $db->escapeString($fn->xss_clean($_GET['order']));
-    if (isset($_GET['type']) && !empty($_GET['type'])){
-        $type = $db->escapeString($fn->xss_clean($_GET['type']));
-        $where .= "AND t.type = '$type' ";
-      
-    }
-    if (isset($_GET['search']) && !empty($_GET['search'])) {
-        $search = $db->escapeString($fn->xss_clean($_GET['search']));
-        $where .= "AND u.mobile like '%" . $search . "%' ";
-    }
     if (isset($_GET['sort'])) {
         $sort = $db->escapeString($_GET['sort']);
     }
@@ -471,9 +470,10 @@ if (isset($_GET['table']) && $_GET['table'] == 'recharge') {
         $order = $db->escapeString($_GET['order']);
     }
     if (isset($_GET['search']) && !empty($_GET['search'])) {
-        $search = $db->escapeString($_GET['search']);
-        $where .= " AND (u.mobile LIKE '%" . $search . "%' OR u.name LIKE '%" . $search . "%' OR u.mobile LIKE '%" . $search . "%')";
+        $search = $db->escapeString($fn->xss_clean($_GET['search']));
+        $where .= " AND (u.mobile LIKE '%" . $search . "%' OR u.name LIKE '%" . $search . "%' OR refer_code LIKE '%" . $search . "%')";
     }
+    
     $join = "LEFT JOIN `users` u ON l.user_id = u.id WHERE l.id IS NOT NULL " . $where;
 
     $sql = "SELECT COUNT(l.id) AS total FROM `recharge` l " . $join;
@@ -503,6 +503,7 @@ foreach ($res as $row) {
             $tempRow['image'] = 'No Image';
         }
         $tempRow['recharge_amount'] = $row['recharge_amount'];
+        $tempRow['datetime'] = $row['datetime'];
         if($row['status']==1)
         $tempRow['status'] ="<p class='text text-success'>Verified</p>";
     elseif($row['status']==0)
