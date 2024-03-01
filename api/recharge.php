@@ -36,11 +36,23 @@ $date = date('Y-m-d');
 //     print_r(json_encode($response));
 //     return false;
 // }
+
 $sql = "SELECT * FROM users WHERE id = '" . $user_id . "'";
 $db->sql($sql);
 $res = $db->getResult();
 $num = $db->numRows($res);
 if ($num == 1) {
+    $sql = "SELECT id FROM recharge WHERE user_id = $user_id AND status = 0";
+    $db->sql($sql);
+    $res = $db->getResult();
+    $num = $db->numRows($res);
+    if ($num >= 1) {
+        $response["success"]   = false;
+        $response["message"] = "Please wait, your request is still pending";
+        print_r(json_encode($response));
+        return false;
+        
+    }
     if (isset($_FILES['image']) && !empty($_FILES['image']) && $_FILES['image']['error'] == 0 && $_FILES['image']['size'] > 0) {
         if (!is_dir('../upload/images/')) {
             mkdir('../upload/images/', 0777, true);
