@@ -81,7 +81,7 @@ include "header.php";
                     <div class="small-box bg-red">
                         <div class="inner">
                         <h3><?php
-                            $sql = "SELECT SUM(amount) AS amountFROM withdrawals WHERE  status = 0 ";
+                            $sql = "SELECT SUM(amount) AS amount FROM withdrawals WHERE  status = 0 ";
                             $db->sql($sql);
                             $res = $db->getResult();
                             $totalamount = $res[0]['amount'];
