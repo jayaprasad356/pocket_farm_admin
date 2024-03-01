@@ -24,6 +24,7 @@ if (empty($_POST['user_id'])) {
 $user_id = $db->escapeString($_POST['user_id']);
 $recharge_amount = (isset($_POST['recharge_amount']) && $_POST['recharge_amount'] != "") ? $db->escapeString($_POST['recharge_amount']) : "";
 $date = date('Y-m-d');
+$datetime = date('Y-m-d H:i:s');
 // function isBetween9AMand9PM() {
 //     $currentHour = date('H');
 //     $startTimestamp = strtotime('09:00:00');
@@ -75,7 +76,7 @@ if ($num == 1) {
             return false;
         }
         $upload_image= 'upload/images/' . $filename;
-        $sql = "INSERT INTO recharge (`user_id`,`recharge_amount`,`image`,`status`) VALUES ('$user_id','$recharge_amount','$upload_image',0)";
+        $sql = "INSERT INTO recharge (`user_id`,`recharge_amount`,`image`,`status`,`datetime`) VALUES ('$user_id','$recharge_amount','$upload_image',0,'$datetime')";
         $db->sql($sql);
         $response["success"]   = true;
         $response["message"] = "Recharge Added Successfully";
