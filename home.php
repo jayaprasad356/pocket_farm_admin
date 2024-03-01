@@ -127,6 +127,23 @@ include "header.php";
                         
                     </div>
                 </div>
+                <div class="col-lg-4 col-xs-6">
+                    <div class="small-box bg-yellow">
+                        <div class="inner">
+                            <h3><?php
+                             $sql = "SELECT COUNT(id) AS count  FROM users WHERE today_income > 0";
+                             $db->sql($sql);
+                             $res = $db->getResult();
+                             $count = $res[0]['count'];
+                             echo $count;
+                              ?></h3>
+                            <p>Active Users</p>
+                        </div>
+                       
+                        <a href="recharge.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                        
+                    </div>
+                </div>
              </div>
         </section>
     </div>
