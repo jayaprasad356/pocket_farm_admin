@@ -81,13 +81,7 @@ include "header.php";
                     <div class="small-box bg-red">
                         <div class="inner">
                         <h3><?php
-                            $branch_id = (isset($_POST['branch_id']) && $_POST['branch_id']!='') ? $_POST['branch_id'] :"";
-                            if ($branch_id != '') {
-                                $join1="AND users.branch_id='$branch_id'";
-                            } else {
-                                $join1="";
-                            }
-                            $sql = "SELECT SUM(withdrawals.amount) AS amount,withdrawals.user_id,users.id FROM withdrawals,users WHERE withdrawals.user_id=users.id AND withdrawals.status=0 $join1";
+                            $sql = "SELECT SUM(amount) AS amountFROM withdrawals WHERE  status = 0 ";
                             $db->sql($sql);
                             $res = $db->getResult();
                             $totalamount = $res[0]['amount'];
@@ -103,7 +97,7 @@ include "header.php";
                     <div class="small-box bg-blue">
                         <div class="inner">
                             <h3><?php
-                             $sql = "SELECT SUM(recharge_amount) AS recharge_amount  FROM recharge WHERE recharge.status=0 ";
+                             $sql = "SELECT SUM(recharge_amount) AS recharge_amount  FROM recharge WHERE status = 0 ";
                              $db->sql($sql);
                              $res = $db->getResult();
                              $totalamount = $res[0]['recharge_amount'];
@@ -120,7 +114,7 @@ include "header.php";
                     <div class="small-box bg-green">
                         <div class="inner">
                             <h3><?php
-                             $sql = "SELECT SUM(recharge_amount) AS recharge_amount  FROM recharge WHERE recharge.status=1 ";
+                             $sql = "SELECT SUM(recharge_amount) AS recharge_amount  FROM recharge WHERE status=1 AND DATE(datetime) = '$date'";
                              $db->sql($sql);
                              $res = $db->getResult();
                              $totalamount = $res[0]['recharge_amount'];
