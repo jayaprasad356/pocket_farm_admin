@@ -30,12 +30,12 @@ $date = date('Y-m-d');
 //     $endTimestamp = strtotime('21:00:00');
 //     return ($currentHour >= date('H', $startTimestamp)) && ($currentHour < date('H', $endTimestamp));
 // }
-if (!isBetween9AMand9PM()) {
-    $response['success'] = false;
-    $response['message'] = "Recharge time morning 09 AM to 09 PM";
-    print_r(json_encode($response));
-    return false;
-}
+// if (!isBetween9AMand9PM()) {
+//     $response['success'] = false;
+//     $response['message'] = "Recharge time morning 09 AM to 09 PM";
+//     print_r(json_encode($response));
+//     return false;
+// }
 $sql = "SELECT * FROM users WHERE id = '" . $user_id . "'";
 $db->sql($sql);
 $res = $db->getResult();
