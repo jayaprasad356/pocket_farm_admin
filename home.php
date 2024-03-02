@@ -152,7 +152,7 @@ include "header.php";
                     <div class="small-box bg-teal">
                         <div class="inner">
                             <h3><?php
-                             $sql = "SELECT SUM(recharge_amount) AS amount FROM `recharge` WHERE datetime >= '$yes_dt' AND datetime <= '$yes_dt_'";
+                             $sql = "SELECT SUM(recharge_amount) AS amount FROM `recharge` WHERE datetime >= '$yes_dt' AND datetime <= '$yes_dt_' AND status = 1";
                              $db->sql($sql);
                              $res = $db->getResult();
                              $count = $res[0]['amount'];
