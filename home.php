@@ -61,7 +61,7 @@ include "header.php";
                             <p>Users</p>
                         </div>
                         <div class="icon"><i class="fa fa-users"></i></div>
-                        <a href="users.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                        <a href="use₹php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <div class="col-lg-4 col-xs-6">
@@ -78,7 +78,7 @@ include "header.php";
                           <p>Today Registration </p>
                           </div>
                         
-                        <a href="users.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                        <a href="use₹php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <div class="col-lg-4 col-xs-6">
@@ -89,12 +89,12 @@ include "header.php";
                             $db->sql($sql);
                             $res = $db->getResult();
                             $totalamount = $res[0]['amount'];
-                            echo "Rs.".$totalamount;
+                            echo "₹".$totalamount;
                              ?></h3>
                             <p>Unpaid Withdrawals</p>
                         </div>
                         
-                        <a href="users.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                        <a href="use₹php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <div class="col-lg-4 col-xs-6">
@@ -122,7 +122,7 @@ include "header.php";
                              $db->sql($sql);
                              $res = $db->getResult();
                              $totalamount = $res[0]['recharge_amount'];
-                             echo "Rs.".$totalamount;
+                             echo "₹".$totalamount;
                               ?></h3>
                             <p>Today Recharge Amount</p>
                         </div>
@@ -149,14 +149,14 @@ include "header.php";
                     </div>
                 </div>
                 <div class="col-lg-4 col-xs-6">
-                    <div class="small-box bg-info">
+                    <div class="small-box bg-teal">
                         <div class="inner">
                             <h3><?php
                              $sql = "SELECT SUM(recharge_amount) AS amount FROM `recharge` WHERE datetime >= '$yes_dt' AND datetime <= '$yes_dt_'";
                              $db->sql($sql);
                              $res = $db->getResult();
                              $count = $res[0]['amount'];
-                             echo $count;
+                             echo "₹".$count;
                               ?></h3>
                             <p>Yesterday Current Recharge</p>
                         </div>
