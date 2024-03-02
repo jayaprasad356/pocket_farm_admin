@@ -18,7 +18,8 @@ if ($currentTime > $_SESSION['timeout']) {
 }
 $date = date('Y-m-d');
 $datetime = date('Y-m-d H:i:s');
-$datetime_ = date("Y-m-d 00:00:00");
+$yes_dt = date("Y-m-d 00:00:00", strtotime("yesterday"));
+$yes_dt_ = date("Y-m-d H:i:s", strtotime("yesterday"));
 // destroy previous session timeout and create new one
 unset($_SESSION['timeout']);
 $_SESSION['timeout'] = $currentTime + $expired;
@@ -150,7 +151,7 @@ include "header.php";
                     <div class="small-box bg-yellow">
                         <div class="inner">
                             <h3><?php
-                             $sql = "SELECT SUM(recharge_amount) AS amount FROM `recharge` WHERE datetime >= '$datetime_' AND datetime <= '$datetime'";
+                             $sql = "SELECT SUM(recharge_amount) AS amount FROM `recharge` WHERE datetime >= '$yes_dt' AND datetime <= '$yes_dt_'";
                              $db->sql($sql);
                              $res = $db->getResult();
                              $count = $res[0]['amount'];
