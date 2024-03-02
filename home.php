@@ -169,7 +169,7 @@ include "header.php";
                     <div class="small-box bg-purple">
                         <div class="inner">
                         <?php
-                          $sql = "SELECT COUNT(id) AS total FROM users WHERE DATE(registered_datetime) >= '$yes_dt' AND DATE(registered_datetime) <= '$yes_dt_'";
+                          $sql = "SELECT COUNT(id) AS total FROM users WHERE registered_datetime >= '$yes_dt' AND registered_datetime <= '$yes_dt_'";
                           $db->sql($sql);
                           $res = $db->getResult();
                           $num = $res[0]['total']; // Fetch the count from the result
