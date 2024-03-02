@@ -165,6 +165,22 @@ include "header.php";
                         
                     </div>
                 </div>
+                <div class="col-lg-4 col-xs-6">
+                    <div class="small-box bg-purple">
+                        <div class="inner">
+                        <?php
+                          $sql = "SELECT COUNT(id) AS total FROM users WHERE DATE(registered_datetime) >= '$yes_dt' AND DATE(registered_datetime) <= '$yes_dt_'";
+                          $db->sql($sql);
+                          $res = $db->getResult();
+                          $num = $res[0]['total']; // Fetch the count from the result
+                           ?>
+                          <h3><?php echo $num; ?></h3>
+                          <p>Yesterday Current Registration </p>
+                          </div>
+                        
+                        <a href="use₹php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
              </div>
         </section>
     </div>
