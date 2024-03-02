@@ -19,7 +19,8 @@ if ($currentTime > $_SESSION['timeout']) {
 $date = date('Y-m-d');
 $datetime = date('Y-m-d H:i:s');
 $yes_dt = date("Y-m-d 00:00:00", strtotime("yesterday"));
-$yes_dt_ = date("Y-m-d H:i:s", strtotime("yesterday"));
+$yesterday = date("Y-m-d", strtotime("yesterday"));
+$yes_dt_ = $yesterday . " " . date("H:i:s");
 // destroy previous session timeout and create new one
 unset($_SESSION['timeout']);
 $_SESSION['timeout'] = $currentTime + $expired;
