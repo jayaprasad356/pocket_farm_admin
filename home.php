@@ -149,7 +149,7 @@ include "header.php";
                     </div>
                 </div>
                 <div class="col-lg-4 col-xs-6">
-                    <div class="small-box bg-yellow">
+                    <div class="small-box bg-info">
                         <div class="inner">
                             <h3><?php
                              $sql = "SELECT SUM(recharge_amount) AS amount FROM `recharge` WHERE datetime >= '$yes_dt' AND datetime <= '$yes_dt_'";
