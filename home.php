@@ -135,13 +135,13 @@ include "header.php";
                     <div class="small-box bg-yellow">
                         <div class="inner">
                             <h3><?php
-                             $sql = "SELECT COUNT(id) AS count  FROM users WHERE today_income > 0";
+                             $sql = "SELECT COUNT(id) AS count  FROM users WHERE today_income > 0 AND valid = 1";
                              $db->sql($sql);
                              $res = $db->getResult();
                              $count = $res[0]['count'];
                              echo $count;
                               ?></h3>
-                            <p>Active Users</p>
+                            <p>Active Valid Users</p>
                         </div>
                        
                         <a href="recharge.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
