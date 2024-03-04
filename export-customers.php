@@ -17,7 +17,7 @@ NULL AS ` Billing code Pincode - (O)`,
 NULL AS `Shipping Name -(O)`,
 NULL AS `Shipping Address - (O)`,
 NULL AS ` shipping code Pincode -(O)`,
-CONCAT('', u.account_num, '') AS ` Beneficiary account number(O)`, 
+CONCAT(',', u.account_num, ',') AS ` Beneficiary account number(O)`, 
 u.ifsc AS `IFSC code (O)`, 
 u.bank AS `Bank name(O)`, 
 u.branch AS ` Branch name(O)`,
@@ -30,7 +30,7 @@ NULL AS `Transporter ID (O)`,
 NULL AS `TDS(O)`,
 NULL AS `Notes (O)`
 FROM users u 
-JOIN withdrawals w ON u.id = w.user_id;
+JOIN withdrawals w ON u.id = w.user_id AND w.status = 0;
 ";
 
 	$db->sql($sql);
