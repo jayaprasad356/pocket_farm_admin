@@ -50,9 +50,6 @@ if (isset($_POST['btnCancel'])  && isset($_POST['enable'])) {
             <div class="box">
                 <div class="box-header">
                     <div class="col-md-3">
-                        <a href="download-screenshot.php" class="btn btn-primary"><i class="fa fa-download"></i> Download All Screenshot</a>
-                    </div>
-                    <div class="col-md-3">
                         <h4 class="box-title">Filter by Status</h4>
                         <select id="status" name="status" class="form-control">
                             <option value="">All</option>
@@ -77,10 +74,8 @@ if (isset($_POST['btnCancel'])  && isset($_POST['enable'])) {
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <div class="col-md-3">
-                        <div class="text-right">
-                        <button type="submit" class="btn btn-danger" name="btnCancel">Cancel</button>
-                        </div>
+                    <div class="text-right">
+                            <button type="submit" class="btn btn-danger" name="btnCancel">Cancel</button>
                         </div>
                     </div>
                 </div>
