@@ -3,9 +3,36 @@
 if (isset($_POST['btnPaid'])  && isset($_POST['enable'])) {
     for ($i = 0; $i < count($_POST['enable']); $i++) {
         
+        $enable = $db->escapeString($fn->xss_clean($_POST['enable'][$i]));
+        $recharge = 299;
+        $sql = "SELECT user_id FROM recharge WHERE id = $enable";
+        $db->sql($sql);
+        $res= $db->getResult();
+        $user_id = $res[0]['user_id'];
+        $sql = "SELECT id FROM users WHERE id = $user_id";
+        $db->sql($sql);
+        $res= $db->getResult();
+        if ($num == 1) {
+            $sql = "UPDATE recharge SET recharge_amount = $recharge,status=1 WHERE id = $enable";
+            $db->sql($sql);
+            $datetime = date('Y-m-d H:i:s');
+            $type = 'recharge';
+            $sql = "INSERT INTO transactions (`user_id`,`amount`,`datetime`,`type`)VALUES('$user_id','$recharge','$datetime','$type')";
+            $db->sql($sql);
+            $sql_query = "UPDATE users SET recharge = recharge + $recharge ,total_recharge = total_recharge + $recharge  WHERE id = $user_id";
+            $db->sql($sql_query);
+
+        }
+
+
+    }
+}
+if (isset($_POST['btnCancel'])  && isset($_POST['enable'])) {
+    for ($i = 0; $i < count($_POST['enable']); $i++) {
+        
     
         $enable = $db->escapeString($fn->xss_clean($_POST['enable'][$i]));
-        $sql = "UPDATE recharge SET status=1 WHERE id = $enable";
+        $sql = "UPDATE recharge SET status=2 WHERE id = $enable";
         $db->sql($sql);
         $result = $db->getResult();
     }
@@ -46,6 +73,13 @@ if (isset($_POST['btnPaid'])  && isset($_POST['enable'])) {
                         <div class="col-md-3">
                         <div class="text-right">
                         <button type="submit" class="btn btn-success" name="btnPaid">verifed</button>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="col-md-3">
+                        <div class="text-right">
+                        <button type="submit" class="btn btn-danger" name="btnCancel">Cancel</button>
                         </div>
                         </div>
                     </div>
