@@ -12,6 +12,7 @@ if (isset($_POST['btnPaid'])  && isset($_POST['enable'])) {
         $sql = "SELECT id FROM users WHERE id = $user_id";
         $db->sql($sql);
         $res= $db->getResult();
+        $num = $db->numRows($res);
         if ($num == 1) {
             $sql = "UPDATE recharge SET recharge_amount = $recharge,status=1 WHERE id = $enable";
             $db->sql($sql);
@@ -32,7 +33,7 @@ if (isset($_POST['btnCancel'])  && isset($_POST['enable'])) {
         
     
         $enable = $db->escapeString($fn->xss_clean($_POST['enable'][$i]));
-        $sql = "UPDATE recharge SET status=2 WHERE id = $enable";
+        $sql = "UPDATE recharge SET status=2,recharge_amount = 0 WHERE id = $enable";
         $db->sql($sql);
         $result = $db->getResult();
     }
@@ -58,25 +59,18 @@ if (isset($_POST['btnCancel'])  && isset($_POST['enable'])) {
                             <option value="2">Cancelled</option>
                         </select>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <h4 class="box-title">Filter by Date </h4>
                         <input type="date" class="form-control" id="date" name="date" value="<?php echo (isset($_GET['date'])) ? $_GET['date'] : "" ?>">
                     </div>
-                    <div class="col-md-3">
-                        <div class="text-left">
+                    <div class="col-md-2">
                         <input type="checkbox" onchange="checkAll(this)" name="chk[]" > Select All</input>
-                        </div>
-                        <br>
-                        <div class="col-md-3">
-                        <div class="text-right">
-                        <button type="submit" class="btn btn-success" name="btnPaid">verifed</button>
-                        </div>
-                        </div>
                     </div>
-                    <div class="col-md-3">
-                    <div class="text-right">
-                            <button type="submit" class="btn btn-danger" name="btnCancel">Cancel</button>
-                        </div>
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-success" name="btnPaid">verifed</button>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-danger" name="btnCancel">Cancel</button>
                     </div>
                 </div>
              
