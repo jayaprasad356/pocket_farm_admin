@@ -498,6 +498,7 @@ $tempRow = array();
 foreach ($res as $row) {
         $operate = ' <a href="edit-recharge.php?id=' . $row['id'] . '"><i class="fa fa-edit"></i>Edit</a>';
         $operate .= ' <a class="text text-danger" href="delete-recharge.php?id=' . $row['id'] . '"><i class="fa fa-trash"></i>Delete</a>';
+        $checkbox = '<input type="checkbox" name="enable[]" value="'.$row['id'].'">';
         $tempRow['id'] = $row['id'];
         $tempRow['name'] = $row['name'];
         $tempRow['mobile'] = $row['mobile'];
@@ -511,9 +512,10 @@ foreach ($res as $row) {
         if($row['status']==1)
         $tempRow['status'] ="<p class='text text-success'>Verified</p>";
     elseif($row['status']==0)
-        $tempRow['status']="<p class='text text-danger'>Pending</p>";
+        $tempRow['status']="<p class='text text-danger'>Not-Verified</p>";
     else
         $tempRow['status']="<p class='text text-danger'>Cancelled</p>";
+        $tempRow['column'] = $checkbox;
         $tempRow['operate'] = $operate;
         $rows[] = $tempRow;
     }
