@@ -61,7 +61,7 @@ include "header.php";
                             <p>Users</p>
                         </div>
                         <div class="icon"><i class="fa fa-users"></i></div>
-                        <a href="use₹php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                        <a href="users.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <div class="col-lg-4 col-xs-6">
@@ -78,7 +78,7 @@ include "header.php";
                           <p>Today Registration </p>
                           </div>
                         
-                        <a href="use₹php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                        <a href="users.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <div class="col-lg-4 col-xs-6">
@@ -94,7 +94,7 @@ include "header.php";
                             <p>Unpaid Withdrawals</p>
                         </div>
                         
-                        <a href="use₹php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                        <a href="withdrawals.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <div class="col-lg-4 col-xs-6">
@@ -144,7 +144,7 @@ include "header.php";
                             <p>Active Valid Users</p>
                         </div>
                        
-                        <a href="recharge.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                        <a href="users.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                         
                     </div>
                 </div>
@@ -178,7 +178,7 @@ include "header.php";
                           <p>Yesterday Current Registration </p>
                           </div>
                         
-                        <a href="use₹php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                        <a href="users.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
              </div>

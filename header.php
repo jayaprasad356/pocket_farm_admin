@@ -236,6 +236,12 @@ $fn = new custom_functions;
                         <span>Payment Setting</span>
                     </a>
                 </li>
+                <li class="treeview">
+                    <a href="otp.php">
+                        <i class="fa fa-lock"></i>
+                        <span>OTP</span>
+                    </a>
+                </li>
             </section>
             <!-- /.sidebar -->
         </aside>
