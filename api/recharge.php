@@ -31,12 +31,12 @@ function isBetween9AMand9PM() {
     $endTimestamp = strtotime('21:00:00');
     return ($currentHour >= date('H', $startTimestamp)) && ($currentHour < date('H', $endTimestamp));
 }
-if (!isBetween9AMand9PM()) {
-    $response['success'] = false;
-    $response['message'] = "Recharge time morning 09 AM to 09 PM";
-    print_r(json_encode($response));
-    return false;
-}
+// if (!isBetween9AMand9PM()) {
+//     $response['success'] = false;
+//     $response['message'] = "Recharge time morning 09 AM to 09 PM";
+//     print_r(json_encode($response));
+//     return false;
+// }
 
 $sql = "SELECT * FROM users WHERE id = '" . $user_id . "'";
 $db->sql($sql);
@@ -50,6 +50,17 @@ if ($num == 1) {
     if ($num >= 1) {
         $response["success"]   = false;
         $response["message"] = "Please wait, your request is still pending";
+        print_r(json_encode($response));
+        return false;
+        
+    }
+    $sql = "SELECT id FROM recharge WHERE user_id = $user_id AND DATE(datetime) = '$date'";
+    $db->sql($sql);
+    $res = $db->getResult();
+    $num = $db->numRows($res);
+    if ($num >= 4) {
+        $response["success"] = false;
+        $response["message"] = "Maximum Upload Reached Limit Today";
         print_r(json_encode($response));
         return false;
         
