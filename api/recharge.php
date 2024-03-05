@@ -54,13 +54,13 @@ if ($num == 1) {
         return false;
         
     }
-    $sql = "SELECT id FROM recharge WHERE user_id = $user_id AND DATE(datetime) = '$date'";
+    $sql = "SELECT id FROM recharge WHERE user_id = $user_id AND DATE(datetime) = '$date' AND status = 2";
     $db->sql($sql);
     $res = $db->getResult();
     $num = $db->numRows($res);
     if ($num >= 3) {
         $response["success"] = false;
-        $response["message"] = "Maximum Upload Reached Limit Today";
+        $response["message"] = "Maximum Limit Reached Today";
         print_r(json_encode($response));
         return false;
         
