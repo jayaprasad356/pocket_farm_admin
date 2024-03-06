@@ -99,12 +99,20 @@ $db->sql($sql_check);
 $res_check_user = $db->getResult();
 $num = $db->numRows($res_check_user);
 
-if ($num < 5 && $plan_id > 2) {
+// if ($num < 5 && $plan_id > 2) {
+//     $response['success'] = false;
+//     $response['message'] = "To unlock ".$products." production invite 5 members in ".$t_products." production";
+//     print_r(json_encode($response));
+//     return false;
+// }
+
+if ($plan_id == 3 && $valid < 5) {
     $response['success'] = false;
-    $response['message'] = "To unlock ".$products." production invite 5 members in ".$t_products." production";
+    $response['message'] = "To unlock Tomato production invite 5 members in Chilli production";
     print_r(json_encode($response));
     return false;
 }
+
 if ($recharge >= $price) {
     if($valid == 0 && $price > 0){
         $sql = "UPDATE users SET valid_team = valid_team + 1  WHERE refer_code = '$referred_by'";
