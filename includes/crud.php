@@ -15,24 +15,12 @@ class Database
      * means that they will only be available with the 
      * Database class
      */
-
-<<<<<<< HEAD
-
+    
      //live
     private $db_host = "localhost";  // Change as required
     private $db_user = "u743445510_pocketfarm";  // Change as required
     private $db_pass = "Pocketfarm@0111";  // Change as required
-    private $db_name = "u743445510_pocketfarm"; 
-
-    
-=======
-      //live
-      private $db_host = "localhost";  // Change as required
-      private $db_user = "u743445510_milky_farm";  // Change as required
-      private $db_pass = "Milky_farm@2024";  // Change as required
-      private $db_name = "u743445510_milky_farm"; 
->>>>>>> 65cf9298ae7a1f61f6718fc2c8418a3dc7b4374d
-
+    private $db_name = "u743445510_pocketfarm";
 
    //  private $db_host = "localhost";  // Change as required
     // private $db_user = "root";  // Change as required
