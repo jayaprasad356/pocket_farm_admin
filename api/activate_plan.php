@@ -68,6 +68,7 @@ $validity = $plan[0]['validity'];
 $balance = $user[0]['balance'];
 $recharge = $user[0]['recharge'];
 $valid = $user[0]['valid'];
+$valid_team = $user[0]['valid_team'];
 $total_assets = $user[0]['total_assets'];
 $refer_code = $user[0]['refer_code'];
 $referred_by = $user[0]['referred_by'];
@@ -94,7 +95,7 @@ if (!empty($res1)) {
     $t_products = $res1[0]['products'];
 }
 
-$sql_check = "SELECT * FROM user_plan up LEFT JOIN `users` u ON up.user_id = u.id WHERE u.referred_by = '$referred_by' AND up.plan_id = $t_plan_id";
+$sql_check = "SELECT * FROM user_plan up LEFT JOIN users u ON up.user_id = u.id WHERE u.referred_by = '$referred_by' AND up.plan_id = $t_plan_id";
 $db->sql($sql_check);
 $res_check_user = $db->getResult();
 $num = $db->numRows($res_check_user);
@@ -106,9 +107,9 @@ $num = $db->numRows($res_check_user);
 //     return false;
 // }
 
-if ($plan_id == 3 && $valid < 5) {
+if ($plan_id == 3 && $valid_team < 2) {
     $response['success'] = false;
-    $response['message'] = "To unlock Tomato production invite 5 members in Chilli production";
+    $response['message'] = "To unlock Tomato production invite 2 members in Chilli production";
     print_r(json_encode($response));
     return false;
 }
@@ -145,19 +146,19 @@ if ($recharge >= $price) {
 
                 }
             }
-            $sql = "UPDATE `users` SET `balance` = `balance` + $invite_bonus,`today_income` = `today_income` + $invite_bonus,`total_income` = `total_income` + $invite_bonus,`team_income` = `team_income` + $invite_bonus  WHERE `refer_code` = '$referred_by'";
+            $sql = "UPDATE users SET balance = balance + $invite_bonus,today_income = today_income + $invite_bonus,total_income = total_income + $invite_bonus,team_income = team_income + $invite_bonus  WHERE refer_code = '$referred_by'";
             $db->sql($sql);
 
-            $sql = "INSERT INTO transactions (`user_id`, `amount`, `datetime`, `type`) VALUES ('$r_id', '$invite_bonus', '$datetime', 'invite_bonus')";
+            $sql = "INSERT INTO transactions (user_id, amount, datetime, type) VALUES ('$r_id', '$invite_bonus', '$datetime', 'invite_bonus')";
             $db->sql($sql);
         }
 
     }
     
-    $sql_insert_user_plan = "INSERT INTO user_plan (`user_id`,`plan_id`,`joined_date`) VALUES ('$user_id','$plan_id','$date')";
+    $sql_insert_user_plan = "INSERT INTO user_plan (user_id,plan_id,joined_date) VALUES ('$user_id','$plan_id','$date')";
     $db->sql($sql_insert_user_plan);
 
-    $sql_insert_transaction = "INSERT INTO transactions (`user_id`, `amount`, `datetime`, `type`) VALUES ('$user_id', '$price', '$datetime', 'start_production')";
+    $sql_insert_transaction = "INSERT INTO transactions (user_id, amount, datetime, type) VALUES ('$user_id', '$price', '$datetime', 'start_production')";
     $db->sql($sql_insert_transaction);
 
     $response['success'] = true;
