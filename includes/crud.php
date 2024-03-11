@@ -16,6 +16,7 @@ class Database
      * Database class
      */
 
+<<<<<<< HEAD
 
      //live
     private $db_host = "localhost";  // Change as required
@@ -24,6 +25,13 @@ class Database
     private $db_name = "u743445510_pocketfarm"; 
 
     
+=======
+      //live
+      private $db_host = "localhost";  // Change as required
+      private $db_user = "u743445510_milky_farm";  // Change as required
+      private $db_pass = "Milky_farm@2024";  // Change as required
+      private $db_name = "u743445510_milky_farm"; 
+>>>>>>> 65cf9298ae7a1f61f6718fc2c8418a3dc7b4374d
 
 
    //  private $db_host = "localhost";  // Change as required
