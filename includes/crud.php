@@ -18,16 +18,12 @@ class Database
 
 
      //live
-   // private $db_host = "localhost";  // Change as required
-   // private $db_user = "u743445510_pocketfarm";  // Change as required
-    //private $db_pass = "Pocketfarm@0111";  // Change as required
-    //private $db_name = "u743445510_pocketfarm"; 
+    private $db_host = "localhost";  // Change as required
+    private $db_user = "u743445510_pocketfarm";  // Change as required
+    private $db_pass = "Pocketfarm@0111";  // Change as required
+    private $db_name = "u743445510_pocketfarm"; 
 
-      //DEMO
-      private $db_host = "localhost";  // Change as required
-      private $db_user = "u743445510_milky_farm";  // Change as required
-      private $db_pass = "Milky_farm@2024";  // Change as required
-      private $db_name = "u743445510_milky_farm"; 
+    
 
 
    //  private $db_host = "localhost";  // Change as required
