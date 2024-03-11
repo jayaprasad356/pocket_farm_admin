@@ -242,6 +242,12 @@ $fn = new custom_functions;
                         <span>OTP</span>
                     </a>
                 </li>
+                <li class="treeview">
+                    <a href="hour-withdrawal-reports.php">
+                        <i class="fa fa-adn"></i>
+                        <span>Hour Withdrawal Reports</span>
+                    </a>
+                </li>
             </section>
             <!-- /.sidebar -->
         </aside>

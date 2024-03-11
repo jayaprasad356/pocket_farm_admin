@@ -831,5 +831,64 @@ if (isset($_GET['table']) && $_GET['table'] == 'otp') {
     $bulkData['rows'] = $rows;
     print_r(json_encode($bulkData));
 }
+
+//hour withdrawal report table goes here
+if (isset($_GET['table']) && $_GET['table'] == 'hour_withdrawal') {
+    $offset = 0;
+    $limit = 10;
+    $where = '';
+    $sort = 'id';
+    $order = 'DESC';
+
+    if (isset($_GET['date']) && $_GET['date'] != '') {
+        $date = $db->escapeString($fn->xss_clean($_GET['date']));
+        $where = " WHERE DATE(datetime) = '$date'";
+    } 
+    if (isset($_GET['offset']))
+        $offset = $db->escapeString($fn->xss_clean($_GET['offset']));
+    if (isset($_GET['limit']))
+        $limit = $db->escapeString($fn->xss_clean($_GET['limit']));
+
+    if (isset($_GET['sort']))
+        $sort = $db->escapeString($fn->xss_clean($_GET['sort']));
+    if (isset($_GET['order']))
+        $order = $db->escapeString($fn->xss_clean($_GET['order']));
+
+    if (isset($_GET['search']) && !empty($_GET['search'])) {
+        $search = $db->escapeString($fn->xss_clean($_GET['search']));
+        $where .= "AND u.mobile like '%" . $search . "%' OR w.datetime like '%" . $search . "%' OR u.upi like '%" . $search . "%' OR w.amount like  '%" . $search . "%' ";
+    }
+    if (isset($_GET['sort'])){
+        $sort = $db->escapeString($_GET['sort']);
+
+    }
+    if (isset($_GET['order'])){
+        $order = $db->escapeString($_GET['order']);
+    }  
+    $sql = "SELECT COUNT(`id`) as total FROM `withdrawals` " . $where;
+    $db->sql($sql);
+    $res = $db->getResult();
+    foreach ($res as $row)
+        $total = $row['total'];
+    
+     $sql = "SELECT DATE_FORMAT(datetime, '%Y-%m-%d %H:00:00') AS hour_group, SUM(amount) AS total_withdrawal
+     FROM `withdrawals`" . $where . " GROUP BY hour_group";
+    $db->sql($sql);
+    $res = $db->getResult();
+
+    $bulkData = array();
+    $bulkData['total'] = $total;
+
+    $rows = array();
+
+    foreach ($res as $row) {
+        $tempRow = array();
+        $tempRow['hour_group'] = $row['hour_group'];
+        $tempRow['total_withdrawal'] = $row['total_withdrawal'];
+        $rows[] = $tempRow;
+    }
+    $bulkData['rows'] = $rows;
+    echo json_encode($bulkData);
+}
 $db->disconnect();
 
