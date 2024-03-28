@@ -45,7 +45,7 @@ if (isset($_POST['btnCancel']) && isset($_POST['enable'])) {
 </section>
 
 <section class="content">
-<form name="recharge_form" method="post" enctype="multipart/form-data">
+<form name="recharge_form" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
     <div class="row">
         <div class="col-xs-12">
             <div class="box">
@@ -157,3 +157,27 @@ if (isset($_POST['btnCancel']) && isset($_POST['enable'])) {
  }
     
 </script>
+<script>
+function validateForm() {
+    var price = document.getElementById("price").value;
+    var checkboxes = document.getElementsByName("enable[]");
+    var checked = false;
+
+    // Check if at least one checkbox is checked
+    for (var i = 0; i < checkboxes.length; i++) {
+        if (checkboxes[i].checked) {
+            checked = true;
+            break;
+        }
+    }
+
+    // If no price is selected and at least one checkbox is checked, show error
+    if (price === "" && checked) {
+        alert("Please select a price.");
+        return false; // Prevent form submission
+    }
+
+    return true; // Proceed with form submission
+}
+</script>
+
