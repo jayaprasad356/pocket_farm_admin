@@ -67,7 +67,7 @@ if (isset($_POST['btnCancel']) && isset($_POST['enable'])) {
                          <h4 class="box-title">Select Price</h4>
                           <select id='price' name="price" class='form-control'>
                             <?php
-                            $sql = "SELECT price FROM `plan` GROUP BY price ORDER BY id"; // Modified to group by 'products' column
+                            $sql = "SELECT price FROM `plan` WHERE price > 0 GROUP BY price ORDER BY id"; // Modified to group by 'products' column
                              $db->sql($sql);
                             $result = $db->getResult();
                               foreach ($result as $value) {
