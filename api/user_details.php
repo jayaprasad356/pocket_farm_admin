@@ -33,7 +33,7 @@ if ($num >= 1) {
     $user_details['profile'] = DOMAIN_URL . $user_details['profile'];
     $response['success'] = true;
     $response['message'] = "User Details Retrieved Successfully";
-    $response['data'] = $user_details;
+    $response['data'] = array($user_details);
     echo json_encode($response);
 } else {
     $response['success'] = false;
