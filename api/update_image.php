@@ -49,14 +49,14 @@ if ($num == 1) {
                 $response["success"] = true;
                 $response["message"] = "Profile updated successfully";
             } 
-          } else {
+        } 
+    } else {
         $response["success"] = false;
         $response["message"] = "Image parameter is missing";
     }
 } else {
     $response['success'] = false;
     $response['message'] = "User Not Found";
-}
 }
 
 echo json_encode($response);
