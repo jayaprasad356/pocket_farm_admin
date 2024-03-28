@@ -46,12 +46,12 @@ if ($num == 1) {
                 $sql = "UPDATE users SET profile = '$upload_image' WHERE id = '$user_id'";
                 $db->sql($sql);
 
-                $sql = "SELECT * FROM users WHERE id = '$user_id'";
+                $sql = "SELECT profile FROM users WHERE id = '$user_id'";
                 $db->sql($sql);
                 $user_details = $db->getResult()[0];
-                $user_details['profile'] = DOMAIN_URL . $user_details['profile'];
                 $response["success"] = true;
                 $response["message"] = "Profile updated successfully";
+                $response["profile"] = DOMAIN_URL . $user_details['profile'];
                 $response["user_details"] = $user_details;
             } 
         } 
