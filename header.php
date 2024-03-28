@@ -84,12 +84,15 @@ $fn = new custom_functions;
         <![endif]-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/bootstrap-table.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/extensions/filter-control/bootstrap-table-filter-control.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="your-integrity-hash" crossorigin="anonymous" />
+
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.4.1/jquery.fancybox.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.4.1/jquery.fancybox.min.js"></script>
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+    
 
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/css/lightbox.min.css" integrity="sha256-tBxlolRHP9uMsEFKVk+hk//ekOlXOixLKvye5W2WR5c=" crossorigin="anonymous" />
@@ -226,7 +229,7 @@ $fn = new custom_functions;
                 </li>
                 <li class="treeview">
                     <a href="explore.php">
-                        <i class="fa fa-adn"></i>
+                        <i class="fa fa-bullseye"></i>
                         <span>Explore</span>
                     </a>
                 </li>
@@ -244,8 +247,14 @@ $fn = new custom_functions;
                 </li>
                 <li class="treeview">
                     <a href="hour-withdrawal-reports.php">
-                        <i class="fa fa-adn"></i>
+                        <i class="fa fa-clock"></i>
                         <span>Hour Withdrawal Reports</span>
+                    </a>
+                </li>
+                <li class="treeview">
+                    <a href="market.php">
+                    <i class="fas fa-shopping-bag"></i>
+                        <span>Market</span>
                     </a>
                 </li>
             </section>
