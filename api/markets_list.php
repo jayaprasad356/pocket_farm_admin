@@ -17,8 +17,15 @@ if (empty($_POST['user_id'])) {
     print_r(json_encode($response));
     return false;
 }
+if (empty($_POST['plan_id'])) {
+    $response['success'] = false;
+    $response['message'] = "Plan ID is Empty";
+    print_r(json_encode($response));
+    return false;
+}
 
 $user_id = $db->escapeString($_POST['user_id']);
+$plan_id = $db->escapeString($_POST['plan_id']);
 
 $sql = "SELECT * FROM users WHERE id = $user_id ";
 $db->sql($sql);
@@ -32,7 +39,7 @@ if (empty($user)) {
 }
 
 
-$sql = "SELECT * FROM markets";
+$sql = "SELECT * FROM markets WHERE plan_id = '$plan_id'";
 $db->sql($sql);
 $res= $db->getResult();
 $num = $db->numRows($res);
