@@ -84,15 +84,23 @@ if ($responseArray['status'] === true) {
     $type = 'recharge';
     $data = $responseArray['data'];
     $amount = $data['amount'];
+    $status = $data['status'];
+    if($status == 'success'){
+        $sql = "INSERT INTO transactions (`user_id`, `amount`, `datetime`, `type`) VALUES ('$user_id', '$amount', '$datetime', '$type')";
+        $db->sql($sql);
+    
+        $sql_query = "UPDATE users SET recharge = recharge + $amount, total_recharge = total_recharge + $amount WHERE id = '$user_id'";
+        $db->sql($sql_query);
+    
+        $response['success'] = true;
+        $response['message'] = "Transaction completed successfully";
 
-    $sql = "INSERT INTO transactions (`user_id`, `amount`, `datetime`, `type`) VALUES ('$user_id', '$amount', '$datetime', '$type')";
-    $db->sql($sql);
+    }else{
+        $response['success'] = false;
+        $response['message'] = "Transaction failed";
+    }
 
-    $sql_query = "UPDATE users SET recharge = recharge + $amount, total_recharge = total_recharge + $amount WHERE id = '$user_id'";
-    $db->sql($sql_query);
 
-    $response['success'] = true;
-    $response['message'] = "Transaction completed successfully";
 } else {
     $response['success'] = false;
     $response['message'] = "Transaction failed";
