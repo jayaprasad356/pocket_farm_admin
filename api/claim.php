@@ -29,10 +29,28 @@ if (empty($_POST['plan_id'])) {
     echo json_encode($response);
     return;
 }
+if (empty($_POST['markets_id'])) {
+    $response['success'] = false;
+    $response['message'] = "Markets Id is Empty";
+    echo json_encode($response);
+    return;
+}
 
 
 $user_id = $db->escapeString($_POST['user_id']);
 $plan_id = $db->escapeString($_POST['plan_id']);
+$markets_id = $db->escapeString($_POST['markets_id']);
+
+$sql = "SELECT * FROM markets WHERE id = $markets_id ";
+$db->sql($sql);
+$markets = $db->getResult();
+
+if (empty($markets)) {
+    $response['success'] = false;
+    $response['message'] = "Markets not found";
+    print_r(json_encode($response));
+    return false;
+}
 
 $sql = "SELECT id,referred_by,c_referred_by,d_referred_by FROM users WHERE id = $user_id";
 $db->sql($sql);
@@ -75,17 +93,17 @@ if ($claim == 0) {
     return false;
 }
 
-$sql = "SELECT daily_income FROM plan WHERE id = $plan_id";
+$sql = "SELECT price FROM markets WHERE id = $markets_id";
 $db->sql($sql);
-$plan = $db->getResult();
+$markets = $db->getResult();
 
-if (empty($plan)) {
+if (empty($markets)) {
     $response['success'] = false;
-    $response['message'] = "Plan not found";
+    $response['message'] = "Markets not found";
     echo json_encode($response);
     return;
 }
-$daily_income = $plan[0]['daily_income'];
+$daily_income = $markets[0]['price'];
 
 
 $sql = "UPDATE user_plan SET claim = 0,income = income + $daily_income WHERE plan_id = $plan_id AND user_id = $user_id";
