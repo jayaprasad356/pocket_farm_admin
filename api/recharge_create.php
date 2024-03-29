@@ -60,6 +60,7 @@ if ($num == 0){
     return false;
 }
 $name = $res[0]['name'];
+$email = $res[0]['email'];
 $mobile = $res[0]['mobile'];
 $redirect_url = 'https://www.google.com/';
 
@@ -75,6 +76,7 @@ $data = array(
     'txn_date' => $date,
     'customer_name' => $name,
     'customer_email' => $email,
+    'customer_mobile' => $mobile,
     'redirect_url' => $redirect_url,
     'key' => $key
 );
@@ -102,5 +104,5 @@ curl_close($ch);
 $responseArray = json_decode($resp, true);
 
 
-echo $responseArray;
+echo json_encode($responseArray);
 ?>
