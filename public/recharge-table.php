@@ -50,7 +50,7 @@ if (isset($_POST['btnCancel']) && isset($_POST['enable'])) {
         <div class="col-xs-12">
             <div class="box">
                 <div class="box-header">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                         <h4 class="box-title">Filter by Status</h4>
                         <select id="status" name="status" class="form-control">
                             <option value="">All</option>
@@ -59,10 +59,25 @@ if (isset($_POST['btnCancel']) && isset($_POST['enable'])) {
                             <option value="2">Cancelled</option>
                         </select>
                     </div>
-                    <div class="col-md-4">
-                        <h4 class="box-title">Filter by Date </h4>
-                        <input type="date" class="form-control" id="date" name="date" value="<?php echo (isset($_GET['date'])) ? $_GET['date'] : "" ?>">
+                    <div class="col-md-3">
+                    <h4 class="box-title">Filter by Date </h4>
+                    <input type="date" class="form-control" id="date" name="date" value="<?php echo (isset($_GET['date'])) ? $_GET['date'] : "" ?>">
                     </div>
+                    <div class="col-md-3">
+                        <h4 class="box-title">Filter by Time</h4>
+                        <select class="form-control" id="hour" name="hour">
+                            <option value="">Select Hour</option>
+                            <?php
+                            // Loop through hours in 24-hour format
+                            for ($i = 0; $i < 24; $i++) {
+                                // Format hour with leading zero if needed
+                                $hour = sprintf("%02d", $i);
+                                echo "<option value='$hour'>$hour</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
+
                     <div class="form-group col-md-3">
                          <h4 class="box-title">Select Price</h4>
                           <select id='price' name="price" class='form-control'>
@@ -120,6 +135,9 @@ if (isset($_POST['btnCancel']) && isset($_POST['enable'])) {
     $('#date').on('change', function() {
         $('#users_table').bootstrapTable('refresh');
     });
+    $('#hour').on('change', function() {
+        $('#users_table').bootstrapTable('refresh');
+    });
 
     function queryParams(p) {
         return {
@@ -128,6 +146,7 @@ if (isset($_POST['btnCancel']) && isset($_POST['enable'])) {
             "community": $('#community').val(),
             "status": $('#status').val(),
             "date": $('#date').val(),
+            "hour": $('#hour').val(),
             limit: p.limit,
             sort: p.sort,
             order: p.order,
