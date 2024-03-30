@@ -117,6 +117,10 @@ if (isset($_POST['btnCancel'])) { ?>
                                 <h4 class="box-title"> </h4>
                                 <a class="btn btn-block btn-primary" href="add-recharge.php?id=<?php echo $ID ?>"><i class="fa fa-plus-square"></i> Add Recharge</a>
                             </div>
+                            <div class="form-group col-md-3">
+                                <h4 class="box-title"> </h4>
+                                <a class="btn btn-block btn-success" href="add-bonus.php?id=<?php echo $ID ?>"><i class="fa fa-plus-square"></i> Add Bonus</a>
+                            </div>
                 </div>
                 <!-- /.box-header -->
                 <form id="edit_project_form" method="post" enctype="multipart/form-data">
