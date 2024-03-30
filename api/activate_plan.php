@@ -63,8 +63,9 @@ $products = $plan[0]['products'];
 $invite_bonus = $plan[0]['invite_bonus'];
 $price = $plan[0]['price'];
 $daily_income = $plan[0]['daily_income'];
-$total_income = $plan[0]['total_income'];
-$validity = $plan[0]['validity'];
+//$total_income = $plan[0]['total_income'];
+//$validity = $plan[0]['validity'];
+$num_times = $plan[0]['num_times'];
 $balance = $user[0]['balance'];
 $recharge = $user[0]['recharge'];
 $valid = $user[0]['valid'];
@@ -74,6 +75,14 @@ $refer_code = $user[0]['refer_code'];
 $referred_by = $user[0]['referred_by'];
 
 $datetime = date('Y-m-d H:i:s');
+
+
+if ($num_times == 3) {
+    $response['success'] = false;
+    $response['message'] = "Plan already activated";
+    print_r(json_encode($response));
+    return false;
+}
 
 $sql_check = "SELECT * FROM user_plan WHERE user_id = $user_id AND plan_id = $plan_id";
 $db->sql($sql_check);
@@ -155,6 +164,9 @@ if ($recharge >= $price) {
 
     }
     
+    $sql = "UPDATE plan SET num_times = $num_times + 1 WHERE id = $plan_id";
+    $db->sql($sql);
+
     $sql_insert_user_plan = "INSERT INTO user_plan (user_id,plan_id,joined_date) VALUES ('$user_id','$plan_id','$date')";
     $db->sql($sql_insert_user_plan);
 

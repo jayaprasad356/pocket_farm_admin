@@ -22,8 +22,9 @@ if (isset($_POST['btnEdit'])) {
     $daily_income = $db->escapeString(($_POST['daily_income']));
     $monthly_income = $db->escapeString(($_POST['monthly_income']));
 	$invite_bonus = $db->escapeString(($_POST['invite_bonus']));
+	$num_times = $db->escapeString(($_POST['num_times']));
 	
-		$sql_query = "UPDATE plan SET products='$products',price='$price',daily_quantity='$daily_quantity',daily_income='$daily_income',monthly_income='$monthly_income',invite_bonus='$invite_bonus',unit='$unit' WHERE id =  $ID";
+		$sql_query = "UPDATE plan SET products='$products',price='$price',daily_quantity='$daily_quantity',daily_income='$daily_income',monthly_income='$monthly_income',invite_bonus='$invite_bonus',unit='$unit',num_times = '$num_times' WHERE id =  $ID";
 		$db->sql($sql_query);
 		$result = $db->getResult();             
 		if (!empty($result)) {
@@ -107,13 +108,17 @@ if (isset($_POST['btnCancel'])) { ?>
                     <input type="hidden" name="old_image" value="<?php echo isset($res[0]['image']) ? $res[0]['image'] : ''; ?>">
 				    	<div class="row">
 					  	  <div class="form-group">
-                               <div class="col-md-6">
+                               <div class="col-md-4">
 									<label for="exampleInputEmail1">Products</label><i class="text-danger asterik">*</i>
 									<input type="text" class="form-control" name="products" value="<?php echo $res[0]['products']; ?>">
 								</div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
 									<label for="exampleInputEmail1">Price</label><i class="text-danger asterik">*</i>
 									<input type="number" class="form-control" name="price" value="<?php echo $res[0]['price']; ?>">
+								</div>
+								<div class="col-md-4">
+									<label for="exampleInputEmail1">Number of Times</label><i class="text-danger asterik">*</i>
+									<input type="number" class="form-control" name="num_times" value="<?php echo $res[0]['num_times']; ?>">
 								</div>
                             </div>
                          </div>

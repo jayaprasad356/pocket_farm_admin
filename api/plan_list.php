@@ -48,6 +48,7 @@ if ($num >= 1){
         $temp['monthly_income'] = $row['monthly_income'];
         $temp['invite_bonus'] = $row['invite_bonus'];
         $temp['daily_quantity'] = $row['daily_quantity'];
+        $temp['num_times'] = $row['num_times'];
         $rows[] = $temp;
     }
     $response['success'] = true;
