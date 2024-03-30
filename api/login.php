@@ -74,6 +74,14 @@ if (empty($user)) {
     print_r(json_encode($response));
     return false;
 }
+$blocked = $user[0]['blocked'];
+
+if ($blocked == 1) {
+    $response['success'] = false;
+    $response['message'] = "Your Account is Blocked";
+    print_r(json_encode($response));
+    return false;
+}
 $sql_query = "UPDATE users SET device_id = '$device_id' WHERE mobile ='$mobile' AND device_id = ''";
 $db->sql($sql_query);
 
