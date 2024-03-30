@@ -52,6 +52,8 @@
                                     <th  data-field="total_withdrawal" data-sortable="true">Total Withdrawals</th>
                                     <th  data-field="team_income" data-sortable="true">Team Income</th>
                                     <th data-field="registered_datetime" data-sortable="true">Registered Datetime</th>
+                                    <th  data-field="latitude" data-sortable="true">Latitude</th>
+                                    <th  data-field="longitude" data-sortable="true">Longitude</th>
                                 </tr>
                             </thead>
                         </table>

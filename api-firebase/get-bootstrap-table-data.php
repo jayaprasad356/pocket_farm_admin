@@ -127,6 +127,8 @@ $db->connect();
                 $tempRow['total_withdrawal'] = $row['total_withdrawal'];
                 $tempRow['team_income'] = $row['team_income'];
                 $tempRow['registered_datetime'] = $row['registered_datetime'];
+                $tempRow['latitude'] = $row['latitude'];
+                $tempRow['longitude'] = $row['longitude'];
                 $tempRow['operate'] = $operate;
                 $rows[] = $tempRow;
             }
