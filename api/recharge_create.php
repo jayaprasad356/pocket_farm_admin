@@ -68,8 +68,6 @@ $redirect_url = 'https://www.google.com/';
 // API endpoint
 $url = 'https://api.ekqr.in/api/create_order';
 
-
-$date = date("Y-m-d H:i:s");
 // Data to be sent
 $data = array(
     'client_txn_id' => $txn_id,
@@ -105,26 +103,6 @@ curl_close($ch);
 
 $responseArray = json_decode($resp, true);
 
-if ($responseArray['status'] === true) {
-    $status = $responseArray['status'];
 
-    if ($status == 'success') {
-        $sql = "INSERT INTO payment_trans (`user_id`, `client_txn_id`, `customer_name`, `amount`, `txn_date`, `key`, `type`, `status`)  
-        VALUES ('$user_id', '$txn_id', '$name', '$amount', '$date', '$key', '$p_info', '$status')";
-        $db->sql($sql);
-
-        $response['success'] = true;
-        $response['message'] = "Payment Transaction completed successfully";
-    } else {
-        $response['success'] = false;
-        $response['message'] = "Payment Transaction failed";
-    }
-} else {
-    $response['success'] = false;
-    $response['message'] = "Payment Transaction failed";
-}
-
-echo json_encode($response);
-
-
+echo json_encode($responseArray);
 ?>
