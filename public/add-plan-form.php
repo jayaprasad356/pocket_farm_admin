@@ -14,6 +14,7 @@ if (isset($_POST['btnAdd'])) {
         $invite_bonus = $db->escapeString(($_POST['invite_bonus']));
         $daily_quantity = $db->escapeString(($_POST['daily_quantity']));
         $unit = $db->escapeString(($_POST['unit']));
+        $num_times = $db->escapeString(($_POST['num_times']));
         $error = array();
        
         if (empty($products)) {
@@ -37,6 +38,9 @@ if (isset($_POST['btnAdd'])) {
         if (empty($unit)) {
             $error['unit'] = " <span class='label label-danger'>Required!</span>";
         }
+        if (empty($num_times)) {
+            $error['num_times'] = " <span class='label label-danger'>Required!</span>";
+        }
        
             // Validate and process the image upload
     if ($_FILES['image']['size'] != 0 && $_FILES['image']['error'] == 0 && !empty($_FILES['image'])) {
@@ -55,10 +59,10 @@ if (isset($_POST['btnAdd'])) {
         }
 
         $upload_image = 'upload/images/' . $filename;
-        $sql = "INSERT INTO plan (products,price,daily_quantity,unit,daily_income,monthly_income,invite_bonus,image) VALUES ('$products','$price', '$daily_quantity','$unit','$daily_income','$monthly_income','$invite_bonus','$upload_image')";
+        $sql = "INSERT INTO plan (products,price,daily_quantity,unit,daily_income,monthly_income,invite_bonus,image,num_times) VALUES ('$products','$price', '$daily_quantity','$unit','$daily_income','$monthly_income','$invite_bonus','$upload_image','$num_times')";
         $db->sql($sql);
     } else {
-            $sql_query = "INSERT INTO plan (products,price,daily_quantity,unit,daily_income,monthly_income,invite_bonus) VALUES ('$products','$price','$daily_quantity','$unit','$daily_income','$monthly_income','$invite_bonus')";
+            $sql_query = "INSERT INTO plan (products,price,daily_quantity,unit,daily_income,monthly_income,invite_bonus,num_times) VALUES ('$products','$price','$daily_quantity','$unit','$daily_income','$monthly_income','$invite_bonus','$num_times')";
             $db->sql($sql);
         }
             $result = $db->getResult();
@@ -102,13 +106,17 @@ if (isset($_POST['btnAdd'])) {
                     <div class="box-body">
                        <div class="row">
                             <div class="form-group">
-                                <div class='col-md-6'>
+                                <div class='col-md-4'>
                                     <label for="exampleInputtitle">Products</label> <i class="text-danger asterik">*</i>
                                     <input type="text" class="form-control" name="products" required>
                                 </div>
-                                <div class='col-md-6'>
+                                <div class='col-md-4'>
                                     <label for="exampleInputtitle">Price</label> <i class="text-danger asterik">*</i>
                                     <input type="number" class="form-control" name="price" required>
+                                </div>
+                                <div class='col-md-4'>
+                                    <label for="exampleInputtitle">Number of Times</label> <i class="text-danger asterik">*</i>
+                                    <input type="number" class="form-control" name="num_times" required>
                                 </div>
                             </div>
                         </div>
