@@ -252,12 +252,6 @@ $fn = new custom_functions;
                     </a>
                 </li>
                 <li class="treeview">
-                    <a href="market.php">
-                    <i class="fas fa-shopping-bag"></i>
-                        <span>Market</span>
-                    </a>
-                </li>
-                <li class="treeview">
                     <a href="markets.php">
                     <i class="fas fa-shopping-bag"></i>
                         <span>Markets</span>

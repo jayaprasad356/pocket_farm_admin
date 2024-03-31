@@ -52,7 +52,7 @@ if (empty($markets)) {
     return false;
 }
 
-$sql = "SELECT id,referred_by,c_referred_by,d_referred_by FROM users WHERE id = $user_id";
+$sql = "SELECT id,referred_by,c_referred_by,d_referred_by,valid_team FROM users WHERE id = $user_id";
 $db->sql($sql);
 $user = $db->getResult();
 
@@ -65,16 +65,17 @@ if (empty($user)) {
 
 $dayOfWeek = date('w');
 
-if ($dayOfWeek == 0 || $dayOfWeek == 7) {
-    $response['success'] = false;
-    $response['message'] = "Market Open time From Monday to Saturday";
-    print_r(json_encode($response));
-    return false;
-} 
+// if ($dayOfWeek == 0 || $dayOfWeek == 7) {
+//     $response['success'] = false;
+//     $response['message'] = "Market Open time From Monday to Saturday";
+//     print_r(json_encode($response));
+//     return false;
+// } 
 
 $referred_by = $user[0]['referred_by'];
 $c_referred_by = $user[0]['c_referred_by'];
 $d_referred_by = $user[0]['d_referred_by'];
+$valid_team = $user[0]['valid_team'];
 $sql = "SELECT * FROM user_plan WHERE user_id = $user_id AND plan_id = $plan_id";
 $db->sql($sql);
 $user_plan = $db->getResult();
@@ -93,7 +94,7 @@ if ($claim == 0) {
     return false;
 }
 
-$sql = "SELECT price FROM markets WHERE id = $markets_id";
+$sql = "SELECT price,min_valid_team FROM markets WHERE id = $markets_id";
 $db->sql($sql);
 $markets = $db->getResult();
 
@@ -104,7 +105,15 @@ if (empty($markets)) {
     return;
 }
 $daily_income = $markets[0]['price'];
+$min_valid_team = $markets[0]['min_valid_team'];
 
+if($min_valid_team > $valid_team){
+    $response['success'] = false;
+    $response['message'] = "Minimum ".$min_valid_team." Valid Team Required";
+    echo json_encode($response);
+    return;
+
+}
 
 $sql = "UPDATE user_plan SET claim = 0,income = income + $daily_income WHERE plan_id = $plan_id AND user_id = $user_id";
 $db->sql($sql);
