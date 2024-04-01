@@ -63,8 +63,9 @@ $products = $plan[0]['products'];
 $invite_bonus = $plan[0]['invite_bonus'];
 $price = $plan[0]['price'];
 $daily_income = $plan[0]['daily_income'];
-$total_income = $plan[0]['total_income'];
-$validity = $plan[0]['validity'];
+//$total_income = $plan[0]['total_income'];
+//$validity = $plan[0]['validity'];
+$num_times = $plan[0]['num_times'];
 $balance = $user[0]['balance'];
 $recharge = $user[0]['recharge'];
 $valid = $user[0]['valid'];
@@ -75,8 +76,19 @@ $referred_by = $user[0]['referred_by'];
 
 $datetime = date('Y-m-d H:i:s');
 
+$sql = "SELECT COUNT(*) AS count FROM user_plan WHERE plan_id = $plan_id";
+$db->sql($sql);
+$res_check_plan = $db->getResult();
+$user_num_times = $res_check_plan[0]['count'];
 
-$sql_check = "SELECT * FROM user_plan WHERE user_id = $user_id AND plan_id = $plan_id";
+if ($user_num_times >= $num_times) {
+    $response['success'] = false;
+    $response['message'] = "Plan already activated";
+    print_r(json_encode($response));
+    return false;
+}
+
+$sql_check =  "SELECT * FROM user_plan WHERE user_id = $user_id AND plan_id = $plan_id";
 $db->sql($sql_check);
 $res_check_user = $db->getResult();
 
