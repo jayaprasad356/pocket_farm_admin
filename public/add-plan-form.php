@@ -15,6 +15,7 @@ if (isset($_POST['btnAdd'])) {
         $daily_quantity = $db->escapeString(($_POST['daily_quantity']));
         $unit = $db->escapeString(($_POST['unit']));
         $num_times = $db->escapeString(($_POST['num_times']));
+        $stock = $db->escapeString(($_POST['stock']));
         $error = array();
        
         if (empty($products)) {
@@ -59,10 +60,10 @@ if (isset($_POST['btnAdd'])) {
         }
 
         $upload_image = 'upload/images/' . $filename;
-        $sql = "INSERT INTO plan (products,price,daily_quantity,unit,daily_income,monthly_income,invite_bonus,image,num_times) VALUES ('$products','$price', '$daily_quantity','$unit','$daily_income','$monthly_income','$invite_bonus','$upload_image','$num_times')";
+        $sql = "INSERT INTO plan (products,price,daily_quantity,unit,daily_income,monthly_income,invite_bonus,image,num_times,stock) VALUES ('$products','$price', '$daily_quantity','$unit','$daily_income','$monthly_income','$invite_bonus','$upload_image','$num_times','$stock')";
         $db->sql($sql);
     } else {
-            $sql_query = "INSERT INTO plan (products,price,daily_quantity,unit,daily_income,monthly_income,invite_bonus,num_times) VALUES ('$products','$price','$daily_quantity','$unit','$daily_income','$monthly_income','$invite_bonus','$num_times')";
+            $sql_query = "INSERT INTO plan (products,price,daily_quantity,unit,daily_income,monthly_income,invite_bonus,num_times,stock) VALUES ('$products','$price','$daily_quantity','$unit','$daily_income','$monthly_income','$invite_bonus','$num_times','$stock')";
             $db->sql($sql);
         }
             $result = $db->getResult();
@@ -159,7 +160,17 @@ if (isset($_POST['btnAdd'])) {
                                     <input type="text" class="form-control" name="unit" required>
                                 </div>
                             </div> 
-                        </div>  
+                        </div> 
+                        <br> 
+                        <div class="row">
+                            <div class="form-group">
+							<div class='col-md-3'>
+                              <label for="">Stock</label><br>
+                                    <input type="checkbox" id="stock_button" class="js-switch" <?= isset($res[0]['stock']) && $res[0]['stock'] == 1 ? 'checked' : '' ?>>
+                                    <input type="hidden" id="stock" name="stock" value="<?= isset($res[0]['stock']) && $res[0]['stock'] == 1 ? 1 : 0 ?>">
+                                </div>
+                            </div>
+						  </div> 
                         <br>
                     <!-- /.box-body -->
 
@@ -230,5 +241,16 @@ function readURL(input) {
     }
 }
 </script>
+<script>
+    var changeCheckbox = document.querySelector('#stock_button');
+    var init = new Switchery(changeCheckbox);
+    changeCheckbox.onchange = function() {
+        if ($(this).is(':checked')) {
+            $('#stock').val(1);
 
+        } else {
+            $('#stock').val(0);
+        }
+    };
+</script>
 <?php $db->disconnect(); ?>

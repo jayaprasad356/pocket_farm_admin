@@ -210,6 +210,10 @@ $db->connect();
                 } else {
                     $tempRow['image'] = 'No Image';
                 }
+                if($row['stock']==1)
+                $tempRow['stock'] ="<p class='text text-success'>Enabled</p>";
+                else
+              $tempRow['stock']="<p class='text text-danger'>Disabled</p>";
                 $tempRow['operate'] = $operate;
                 $rows[] = $tempRow;
             }

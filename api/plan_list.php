@@ -49,6 +49,7 @@ if ($num >= 1){
         $temp['invite_bonus'] = $row['invite_bonus'];
         $temp['daily_quantity'] = $row['daily_quantity'];
         $temp['num_times'] = $row['num_times'];
+        $temp['stock'] = $row['stock'];
         $rows[] = $temp;
     }
     $response['success'] = true;

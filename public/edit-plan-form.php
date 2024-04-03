@@ -23,8 +23,9 @@ if (isset($_POST['btnEdit'])) {
     $monthly_income = $db->escapeString(($_POST['monthly_income']));
 	$invite_bonus = $db->escapeString(($_POST['invite_bonus']));
 	$num_times = $db->escapeString(($_POST['num_times']));
+	$stock = $db->escapeString(($_POST['stock']));
 	
-		$sql_query = "UPDATE plan SET products='$products',price='$price',daily_quantity='$daily_quantity',daily_income='$daily_income',monthly_income='$monthly_income',invite_bonus='$invite_bonus',unit='$unit',num_times = '$num_times' WHERE id =  $ID";
+		$sql_query = "UPDATE plan SET products='$products',price='$price',daily_quantity='$daily_quantity',daily_income='$daily_income',monthly_income='$monthly_income',invite_bonus='$invite_bonus',unit='$unit',num_times = '$num_times',stock = '$stock' WHERE id =  $ID";
 		$db->sql($sql_query);
 		$result = $db->getResult();             
 		if (!empty($result)) {
@@ -162,6 +163,16 @@ if (isset($_POST['btnCancel'])) { ?>
 									<input type="text" class="form-control" name="unit" value="<?php echo $res[0]['unit']; ?>">
 								</div>
 						  </div>  
+						  <br>
+						  <div class="row">
+                            <div class="form-group">
+							<div class='col-md-3'>
+                              <label for="">Stock</label><br>
+                                    <input type="checkbox" id="stock_button" class="js-switch" <?= isset($res[0]['stock']) && $res[0]['stock'] == 1 ? 'checked' : '' ?>>
+                                    <input type="hidden" id="stock" name="stock" value="<?= isset($res[0]['stock']) && $res[0]['stock'] == 1 ? 1 : 0 ?>">
+                                </div>
+                            </div>
+						  </div> 
                      </div>
 					<div class="box-footer">
 						<button type="submit" class="btn btn-primary" name="btnEdit">Update</button>
@@ -192,4 +203,16 @@ if (isset($_POST['btnCancel'])) { ?>
             reader.readAsDataURL(input.files[0]);
         }
     }
+</script>
+<script>
+    var changeCheckbox = document.querySelector('#stock_button');
+    var init = new Switchery(changeCheckbox);
+    changeCheckbox.onchange = function() {
+        if ($(this).is(':checked')) {
+            $('#stock').val(1);
+
+        } else {
+            $('#stock').val(0);
+        }
+    };
 </script>

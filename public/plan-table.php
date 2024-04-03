@@ -31,6 +31,7 @@
                                     <th data-field="daily_quantity" data-sortable="true">Daily Quantity</th>
                                     <th data-field="num_times" data-sortable="true">Number of Times</th>
                                     <th data-field="image">Image</th>
+                                    <th  data-field="stock" data-sortable="true">Stock</th>
                                 </tr>
                             </thead>
                         </table>

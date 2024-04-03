@@ -63,6 +63,7 @@ $products = $plan[0]['products'];
 $invite_bonus = $plan[0]['invite_bonus'];
 $price = $plan[0]['price'];
 $daily_income = $plan[0]['daily_income'];
+$stock = $plan[0]['stock'];
 //$total_income = $plan[0]['total_income'];
 //$validity = $plan[0]['validity'];
 $num_times = $plan[0]['num_times'];
@@ -75,6 +76,13 @@ $refer_code = $user[0]['refer_code'];
 $referred_by = $user[0]['referred_by'];
 
 $datetime = date('Y-m-d H:i:s');
+
+if ($stock == 0) {
+    $response['success'] = false;
+    $response['message'] = "Out of Stock";
+    print_r(json_encode($response));
+    return false;
+}
 
 $sql = "SELECT COUNT(*) AS count FROM user_plan WHERE plan_id = $plan_id AND user_id = $user_id";
 $db->sql($sql);
