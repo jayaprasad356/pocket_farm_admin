@@ -77,20 +77,25 @@ if (isset($_POST['btnCancel']) && isset($_POST['enable'])) {
                             ?>
                         </select>
                     </div>
-
                     <div class="form-group col-md-3">
-                         <h4 class="box-title">Select Price</h4>
-                          <select id='price' name="price" class='form-control'>
-                            <?php
-                            $sql = "SELECT price FROM `plan` WHERE price > 0 GROUP BY price ORDER BY id"; // Modified to group by 'products' column
-                             $db->sql($sql);
-                            $result = $db->getResult();
-                              foreach ($result as $value) {
-                                  ?>
-                                 <option value='<?= $value['price'] ?>'><?= $value['price'] ?></option>
-                               <?php } ?>
-                             </select>
-                          </div>
+                       <h4 class="box-title">Select or Enter Price</h4>
+                            <select id="price_select" class="form-control">
+                                <option value="">Select</option>
+                                <?php
+                                $sql = "SELECT price FROM `plan` WHERE price > 0 GROUP BY price ORDER BY id";
+                                $db->sql($sql);
+                                $result = $db->getResult();
+                                foreach ($result as $value) {
+                                    ?>
+                                    <option value="<?= $value['price'] ?>"><?= $value['price'] ?></option>
+                                    <?php
+                                }
+                                ?>
+                                <option value="custom">Enter Price</option>
+                            </select>
+                     <input type="number" id="custom_price_input" class="form-control" placeholder="Enter price" style="display: none;">
+                       <input type="hidden" id="price" name="price">
+                        </div>
                     <div class="col-md-2">
                         <input type="checkbox" onchange="checkAll(this)" name="chk[]" > Select All</input>
                     </div>
@@ -200,3 +205,23 @@ function validateForm() {
 }
 </script>
 
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("price_select").addEventListener("change", function() {
+        if (this.value === "custom") {
+            document.getElementById("custom_price_input").style.display = "block";
+            document.getElementById("custom_price_input").setAttribute("name", "custom_price"); // change the name attribute for custom price
+            document.getElementById("price").value = ""; // clear the hidden input value
+        } else {
+            document.getElementById("custom_price_input").style.display = "none";
+            document.getElementById("custom_price_input").removeAttribute("name"); // remove the name attribute for custom price
+            document.getElementById("price").value = this.value; // set the hidden input value to selected price
+        }
+    });
+    
+    // Listen for changes in the custom price input
+    document.getElementById("custom_price_input").addEventListener("input", function() {
+        document.getElementById("price").value = this.value; // update the hidden input value
+    });
+});
+</script>
