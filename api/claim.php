@@ -76,7 +76,7 @@ $referred_by = $user[0]['referred_by'];
 $c_referred_by = $user[0]['c_referred_by'];
 $d_referred_by = $user[0]['d_referred_by'];
 $valid_team = $user[0]['valid_team'];
-$sql = "SELECT * FROM user_plan WHERE user_id = $user_id AND plan_id = $plan_id ORDER BY id LIMIT 1";
+$sql = "SELECT * FROM user_plan WHERE user_id = $user_id AND plan_id = $plan_id ORDER BY claim DESC LIMIT 1";
 $db->sql($sql);
 $user_plan = $db->getResult();
 if (empty($user_plan)) {
