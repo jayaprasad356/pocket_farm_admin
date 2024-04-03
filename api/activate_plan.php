@@ -76,7 +76,7 @@ $referred_by = $user[0]['referred_by'];
 
 $datetime = date('Y-m-d H:i:s');
 
-$sql = "SELECT COUNT(*) AS count FROM user_plan WHERE plan_id = $plan_id";
+$sql = "SELECT COUNT(*) AS count FROM user_plan WHERE plan_id = $plan_id AND user_id = $user_id";
 $db->sql($sql);
 $res_check_plan = $db->getResult();
 $user_num_times = $res_check_plan[0]['count'];
