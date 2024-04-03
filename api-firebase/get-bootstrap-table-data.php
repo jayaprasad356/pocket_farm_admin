@@ -127,6 +127,13 @@ $db->connect();
                 $tempRow['total_withdrawal'] = $row['total_withdrawal'];
                 $tempRow['team_income'] = $row['team_income'];
                 $tempRow['registered_datetime'] = $row['registered_datetime'];
+                $tempRow['latitude'] = $row['latitude'];
+                $tempRow['longitude'] = $row['longitude'];
+                if (!empty($row['profile'])) {
+                    $tempRow['profile'] = "<a data-lightbox='category' href='" . $row['profile'] . "' data-caption='" . $row['profile'] . "'><img src='" . $row['profile'] . "' title='" . $row['profile'] . "' height='50' /></a>";
+                } else {
+                    $tempRow['profile'] = 'No Image';
+                }
                 $tempRow['operate'] = $operate;
                 $rows[] = $tempRow;
             }
@@ -226,7 +233,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'withdrawals') {
 
         if (isset($_GET['search']) && !empty($_GET['search'])) {
             $search = $db->escapeString($fn->xss_clean($_GET['search']));
-            $where .= "AND (u.mobile LIKE '%" . $search . "%' OR u.name LIKE '%" . $search . "%'  OR w.datetime LIKE '%" . $search . "%') ";
+            $where .= "AND (u.mobile LIKE '%" . $search . "%' OR u.name LIKE '%" . $search . "%'  OR w.datetime LIKE '%" . $search . "%' OR u.account_num LIKE '%" . $search . "%') ";
         }
     if (isset($_GET['sort'])){
         $sort = $db->escapeString($_GET['sort']);
