@@ -87,6 +87,7 @@ if (empty($user_plan)) {
 }
 $claim = $user_plan[0]['claim'];
 $user_plan_id = $user_plan[0]['id'];
+$income = $user_plan[0]['income'];
 
 if ($claim == 0) {
     $response['success'] = false;
@@ -106,6 +107,11 @@ if (empty($markets)) {
     return;
 }
 $daily_income = $markets[0]['price'];
+if($income > 300 && $markets_id == 2){
+    $daily_income = '8';
+
+}
+
 $min_valid_team = $markets[0]['min_valid_team'];
 
 if($min_valid_team > $valid_team){
