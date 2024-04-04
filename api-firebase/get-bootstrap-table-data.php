@@ -537,7 +537,7 @@ foreach ($res as $row) {
         if($row['status']==1)
         $tempRow['status'] ="<p class='text text-success'>Verified</p>";
     elseif($row['status']==0)
-        $tempRow['status']="<p class='text text-danger'>Not-Verified</p>";
+        $tempRow['status']="<p class='text text-primary'>Not-Verified</p>";
     else
         $tempRow['status']="<p class='text text-danger'>Cancelled</p>";
         $tempRow['column'] = $checkbox;

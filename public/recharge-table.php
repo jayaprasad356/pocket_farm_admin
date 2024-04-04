@@ -53,8 +53,7 @@ if (isset($_POST['btnCancel']) && isset($_POST['enable'])) {
                     <div class="col-md-3">
                         <h4 class="box-title">Filter by Status</h4>
                         <select id="status" name="status" class="form-control">
-                            <option value="">All</option>
-                            <option value="0">Pending</option>
+                            <option value="0">Not-Verified</option>
                             <option value="1">Verified</option>
                             <option value="2">Cancelled</option>
                         </select>
@@ -181,30 +180,6 @@ if (isset($_POST['btnCancel']) && isset($_POST['enable'])) {
  }
     
 </script>
-<script>
-function validateForm() {
-    var price = document.getElementById("price").value;
-    var checkboxes = document.getElementsByName("enable[]");
-    var checked = false;
-
-    // Check if at least one checkbox is checked
-    for (var i = 0; i < checkboxes.length; i++) {
-        if (checkboxes[i].checked) {
-            checked = true;
-            break;
-        }
-    }
-
-    // If no price is selected and at least one checkbox is checked, show error
-    if (price === "" && checked) {
-        alert("Please select a price.");
-        return false; // Prevent form submission
-    }
-
-    return true; // Proceed with form submission
-}
-</script>
-
 <script>
 document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("price_select").addEventListener("change", function() {
