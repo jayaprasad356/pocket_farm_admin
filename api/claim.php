@@ -52,7 +52,7 @@ if (empty($markets)) {
     return false;
 }
 
-$sql = "SELECT id,referred_by,c_referred_by,d_referred_by,valid_team FROM users WHERE id = $user_id";
+$sql = "SELECT id,referred_by,c_referred_by,d_referred_by,valid_team,valid FROM users WHERE id = $user_id";
 $db->sql($sql);
 $user = $db->getResult();
 
@@ -76,6 +76,14 @@ $referred_by = $user[0]['referred_by'];
 $c_referred_by = $user[0]['c_referred_by'];
 $d_referred_by = $user[0]['d_referred_by'];
 $valid_team = $user[0]['valid_team'];
+$valid = $user[0]['valid'];
+
+if($valid == 1 && $plan_id == 1){
+    $response['success'] = false;
+    $response['message'] = "Due to heavy demand for the free plan, we are unable to provide it to valid users.";
+    echo json_encode($response);
+    return;
+}
 $sql = "SELECT * FROM user_plan WHERE user_id = $user_id AND plan_id = $plan_id ORDER BY claim DESC LIMIT 1";
 $db->sql($sql);
 $user_plan = $db->getResult();
