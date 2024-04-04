@@ -61,10 +61,10 @@ if ($num >= 1){
         $temp['name'] = $row['name'];
         $temp['price'] = $row['price'];
         $temp['min_valid_team'] = $row['min_valid_team'];
-        if($earned_user == 1 && $row['id'] == 2){
-            $temp['price'] = '8';
+        // if($earned_user == 1 && $row['id'] == 2){
+        //     $temp['price'] = '8';
 
-        }
+        // }
         
 
         $rows[] = $temp;

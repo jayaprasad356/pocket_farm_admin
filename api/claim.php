@@ -115,10 +115,10 @@ if (empty($markets)) {
     return;
 }
 $daily_income = $markets[0]['price'];
-if($income > 300 && $markets_id == 2){
-    $daily_income = '8';
+// if($income > 300 && $markets_id == 2){
+//     $daily_income = '8';
 
-}
+// }
 
 $min_valid_team = $markets[0]['min_valid_team'];
 
