@@ -130,15 +130,15 @@ $fn = new custom_functions;
                             <li class="dropdown user user-menu">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <img src="images/avatar.png" class="user-image" alt="User Image">
-                                    <span class="hidden-xs">Admin</span>
+                                    <span class="hidden-xs"><?php echo $_SESSION['role'] ?></span>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <!-- User image -->
                                     <li class="user-header">
                                         <img src="images/avatar.png" class="img-circle" alt="User Image">
                                         <p>
-                                            Admin
-                                            <small>admin@gmail.com</small>
+                                             <small><?php echo $_SESSION['username'] ?></small>
+                                            <small><?php echo $_SESSION['email'] ?></small>
                                         </p>
                                     </li>
                                     <li class="user-footer">
@@ -162,12 +162,14 @@ $fn = new custom_functions;
             <!-- sidebar: style can be found in sidebar.less -->
             <section class="sidebar">
             <ul class="sidebar-menu">
+            <?php
+if ($_SESSION['role'] == 'admin') {
+    ?>
                 <li class="treeview">
                     <a href="home.php">
                         <i class="fa fa-home" class="active"></i> <span>Home</span>
                     </a>
                 </li>
-              
                 <li class="treeview">
                     <a href="users.php">
                     <i class="fa fa-users"></i>
@@ -215,12 +217,16 @@ $fn = new custom_functions;
                         <span>App Update</span>
                     </a>
                 </li>
+                <?php } ?>
                 <li class="treeview">
                     <a href="recharge.php">
                         <i class="fa fa-money"></i>
                         <span>Recharge</span>
                     </a>
                 </li>
+                <?php
+                if ($_SESSION['role'] == 'admin') {
+                     ?>
                 <li class="treeview">
                     <a href="home_slides.php">
                         <i class="fa fa-image"></i>
@@ -257,6 +263,7 @@ $fn = new custom_functions;
                         <span>Markets</span>
                     </a>
                 </li>
+                <?php } ?>
             </section>
             <!-- /.sidebar -->
         </aside>

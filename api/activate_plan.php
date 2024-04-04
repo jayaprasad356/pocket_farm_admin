@@ -119,12 +119,12 @@ $num = $db->numRows($res_check_user);
 //     return false;
 // }
 
-if ($plan_id == 3 && $valid_team < 2) {
-    $response['success'] = false;
-    $response['message'] = "To unlock Tomato production invite 2 members in Chilli production";
-    print_r(json_encode($response));
-    return false;
-}
+//if ($plan_id == 3 && $valid_team < 2) {
+ //   $response['success'] = false;
+ //   $response['message'] = "To unlock Tomato production invite 2 members in Chilli production";
+ //   print_r(json_encode($response));
+ //   return false;
+//}
 
 if ($recharge >= $price) {
     if($valid == 0 && $price > 0){

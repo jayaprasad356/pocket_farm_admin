@@ -46,6 +46,9 @@ include "header.php";
                 </li>
             </ol>
         </section>
+        <?php
+                if ($_SESSION['role'] == 'admin') {
+                  ?>
         <section class="content">
             <div class="row">
                 <div class="col-lg-4 col-xs-6">
@@ -183,6 +186,7 @@ include "header.php";
                 </div>
              </div>
         </section>
+        <?php } ?>
     </div>
     <?php include "footer.php"; ?>
 </body>
