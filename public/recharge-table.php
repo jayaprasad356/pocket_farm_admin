@@ -53,8 +53,7 @@ if (isset($_POST['btnCancel']) && isset($_POST['enable'])) {
                     <div class="col-md-3">
                         <h4 class="box-title">Filter by Status</h4>
                         <select id="status" name="status" class="form-control">
-                            <option value="">All</option>
-                            <option value="0">Pending</option>
+                            <option value="0">Not-Verified</option>
                             <option value="1">Verified</option>
                             <option value="2">Cancelled</option>
                         </select>
@@ -181,7 +180,6 @@ if (isset($_POST['btnCancel']) && isset($_POST['enable'])) {
  }
     
 </script>
-
 <script>
 document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("price_select").addEventListener("change", function() {
