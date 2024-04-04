@@ -181,29 +181,6 @@ if (isset($_POST['btnCancel']) && isset($_POST['enable'])) {
  }
     
 </script>
-<script>
-function validateForm() {
-    var price = document.getElementById("price").value;
-    var checkboxes = document.getElementsByName("enable[]");
-    var checked = false;
-
-    // Check if at least one checkbox is checked
-    for (var i = 0; i < checkboxes.length; i++) {
-        if (checkboxes[i].checked) {
-            checked = true;
-            break;
-        }
-    }
-
-    // If no price is selected and at least one checkbox is checked, show error
-    if (price === "" && checked) {
-        alert("Please select a price.");
-        return false; // Prevent form submission
-    }
-
-    return true; // Proceed with form submission
-}
-</script>
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
