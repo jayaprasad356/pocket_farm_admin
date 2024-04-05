@@ -32,7 +32,7 @@ if (empty($user)) {
 }
 
 
-$sql = "SELECT * FROM plan ORDER BY price";
+$sql = "SELECT * FROM plan WHERE id != 2 ORDER BY price";
 $db->sql($sql);
 $res= $db->getResult();
 $num = $db->numRows($res);
