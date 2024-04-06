@@ -78,7 +78,8 @@ if(curl_errno($ch)){
 curl_close($ch);
 
 $responseArray = json_decode($resp, true);
-
+echo json_encode($responseArray);
+return false;
 if ($responseArray['status'] === true) {
     $datetime = date('Y-m-d H:i:s');
     $type = 'recharge';
@@ -86,11 +87,24 @@ if ($responseArray['status'] === true) {
     $amount = $data['amount'];
     $status = $data['status'];
     if($status == 'success'){
-        $sql = "INSERT INTO transactions (`user_id`, `amount`, `datetime`, `type`) VALUES ('$user_id', '$amount', '$datetime', '$type')";
+        $txn_id = $data['client_txn_id'];
+        $sql = "SELECT id FROM recharge_trans WHERE txn_id = $txn_id AND status = 0 ";
         $db->sql($sql);
-    
-        $sql_query = "UPDATE users SET recharge = recharge + $amount, total_recharge = total_recharge + $amount WHERE id = '$user_id'";
-        $db->sql($sql_query);
+        $res= $db->getResult();
+        $num = $db->numRows($res);
+
+        if ($num == 1){
+            $rech_trans_id = $res[0]['id'];
+            $sql = "INSERT INTO transactions (`user_id`, `amount`, `datetime`, `type`) VALUES ('$user_id', '$amount', '$datetime', '$type')";
+            $db->sql($sql);
+        
+            $sql_query = "UPDATE users SET recharge = recharge + $amount, total_recharge = total_recharge + $amount WHERE id = '$user_id'";
+            $db->sql($sql_query);
+            $sql_query = "UPDATE recharge_trans SET status = 1 WHERE id = '$rech_trans_id'";
+            $db->sql($sql_query);
+
+        }
+
     
         $response['success'] = true;
         $response['message'] = "Transaction completed successfully";
