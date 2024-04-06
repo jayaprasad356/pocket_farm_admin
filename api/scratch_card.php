@@ -27,9 +27,18 @@ if (empty($_POST['user_id'])) {
 
 
 $user_id = $db->escapeString($_POST['user_id']);
+if (empty($_POST['scratch_id'])) {
+    $response['success'] = true;
+    $response['amount'] = 250;
+    $response['scratch_id'] = 123;
+    $response['message'] = "Scratch Card Revealed";
+    print_r(json_encode($response));
+}
+else{
+    $response['success'] = true;
+    $response['message'] = "Scratch Card Claimed Successfully";
+    print_r(json_encode($response));
 
-$response['success'] = true;
-$response['amount'] = 250;
-$response['message'] = "Scratch Card Revealed";
-print_r(json_encode($response));
+}
+
 ?>
