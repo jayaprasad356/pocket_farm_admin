@@ -102,6 +102,15 @@ if(curl_errno($ch)){
 curl_close($ch);
 
 $responseArray = json_decode($resp, true);
+$status = $responseArray['status'];
+if($status == true){
+    $order_id = $responseArray['data']['order_id'];
+    $sql = "INSERT INTO recharge_trans (`user_id`,`txn_id`,`order_id`,`amount`,`status`) VALUES ($user_id,'$txn_id,'$order_id,$amount,1)";
+    $db->sql($sql);
+
+    
+
+}
 
 
 echo json_encode($responseArray);
