@@ -41,7 +41,7 @@ if (empty($_POST['key'])) {
     echo json_encode($response);
     return;
 }
-
+$datetime = date('Y-m-d H:i:s');
 $user_id = $db->escapeString($_POST['user_id']);
 $txn_id = $db->escapeString($_POST['txn_id']);
 $amount = $db->escapeString($_POST['amount']);
@@ -105,7 +105,7 @@ $responseArray = json_decode($resp, true);
 $status = $responseArray['status'];
 if($status == true){
     $order_id = $responseArray['data']['order_id'];
-    $sql = "INSERT INTO recharge_trans (`user_id`,`txn_id`,`order_id`,`amount`,`status`) VALUES ($user_id,'$txn_id','$order_id',$amount,0)";
+    $sql = "INSERT INTO recharge_trans (`user_id`,`txn_id`,`order_id`,`amount`,`status`,`datetime`) VALUES ($user_id,'$txn_id','$order_id',$amount,0,'$datetime')";
     $db->sql($sql);
 
 
