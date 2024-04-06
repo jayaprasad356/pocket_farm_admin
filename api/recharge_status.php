@@ -78,8 +78,6 @@ if(curl_errno($ch)){
 curl_close($ch);
 
 $responseArray = json_decode($resp, true);
-echo json_encode($responseArray);
-return false;
 if ($responseArray['status'] === true) {
     $datetime = date('Y-m-d H:i:s');
     $type = 'recharge';
