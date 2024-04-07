@@ -14,10 +14,30 @@ $db = new Database();
 $db->connect();
 include_once('../includes/custom-functions.php');
 include_once('../includes/functions.php');
+include_once('verify-token.php');
 $fn = new functions;
 
 
 $date = date('Y-m-d');
+
+if (!isset($_POST['accesskey'])) {
+    $response['error'] = true;
+    $response['message'] = "Access key is invalid or not passed!";
+    print_r(json_encode($response));
+    return false;
+}
+$accesskey = $db->escapeString($_POST['accesskey']);
+if ($access_key != $accesskey) {
+    $response['error'] = true;
+    $response['message'] = "invalid accesskey!";
+    print_r(json_encode($response));
+    return false;
+}
+
+if (!verify_token()) {
+    return false;
+}
+
 if (empty($_POST['user_id'])) {
     $response['success'] = false;
     $response['message'] = "User Id is Empty";
