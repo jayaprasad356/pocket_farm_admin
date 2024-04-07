@@ -31,7 +31,7 @@ if (empty($_POST['scratch_id'])) {
     $response['success'] = true;
     $response['amount'] = 250;
     $response['scratch_id'] = 123;
-    $response['message'] = "Scratch Card Revealed";
+    $response['message'] = "Scratch Card Available";
     print_r(json_encode($response));
 }
 else{
