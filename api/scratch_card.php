@@ -27,13 +27,21 @@ if (empty($_POST['user_id'])) {
 
 
 $user_id = $db->escapeString($_POST['user_id']);
+
 if (empty($_POST['scratch_id'])) {
+
+    $sql = "SELECT * FROM scratch_cards WHERE user_id = '$user_id'";
+    $db->sql($sql);
+    $res= $db->getResult();
+    $id = $res[0]['id'];
+
     $response['success'] = true;
-    $response['amount'] = 250;
+    $response['amount'] = rand(20, 50);
     $response['scratch_id'] = 123;
     $response['message'] = "Scratch Card Available";
     print_r(json_encode($response));
 }
+
 else{
     $response['success'] = true;
     $response['message'] = "Scratch Card Claimed Successfully";
