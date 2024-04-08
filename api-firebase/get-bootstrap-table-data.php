@@ -971,5 +971,86 @@ if (isset($_GET['table']) && $_GET['table'] == 'markets') {
     $bulkData['rows'] = $rows;
     print_r(json_encode($bulkData));
 }
+
+//Recharge Trans
+if (isset($_GET['table']) && $_GET['table'] == 'recharge_trans') {
+    $offset = 0;
+    $limit = 10;
+    $where = '';
+    $sort = 'date';
+    $order = 'DESC';
+
+    if (isset($_GET['status']) && $_GET['status'] != '') {
+        $status = $db->escapeString($fn->xss_clean($_GET['status']));
+        $where .= " AND l.status = '$status'";
+    }
+
+    if (isset($_GET['date']) && $_GET['date'] != '') {
+        $selected_date = $db->escapeString($fn->xss_clean($_GET['date']));
+        $formatted_date = date('Y-m-d', strtotime($selected_date));
+        $where .= " AND DATE(l.datetime) = '$formatted_date'";
+    }
+    
+    if (isset($_GET['offset']))
+        $offset = $db->escapeString($fn->xss_clean($_GET['offset']));
+    if (isset($_GET['limit']))
+        $limit = $db->escapeString($fn->xss_clean($_GET['limit']));
+
+    if (isset($_GET['sort']))
+        $sort = $db->escapeString($fn->xss_clean($_GET['sort']));
+    if (isset($_GET['order']))
+        $order = $db->escapeString($fn->xss_clean($_GET['order']));
+
+       
+
+        if (isset($_GET['search']) && !empty($_GET['search'])) {
+            $search = $db->escapeString($fn->xss_clean($_GET['search']));
+            $where .= "AND (u.mobile LIKE '%" . $search . "%' OR u.name LIKE '%" . $search . "%' OR l.txn_id LIKE '%" . $search . "%' OR l.order_id LIKE '%" . $search . "%') ";
+        }
+        
+    if (isset($_GET['sort'])) {
+        $sort = $db->escapeString($_GET['sort']);
+    }
+    if (isset($_GET['order'])) {
+        $order = $db->escapeString($_GET['order']);
+    }
+   
+    $join = "LEFT JOIN `users` u ON l.user_id = u.id WHERE l.id IS NOT NULL " . $where;
+
+    $sql = "SELECT COUNT(l.id) AS total FROM `recharge_trans` l " . $join;
+    $db->sql($sql);
+    $res = $db->getResult();
+    foreach ($res as $row)
+        $total = $row['total'];
+   
+     $sql = "SELECT l.id AS id,l.*,u.name,u.mobile  FROM `recharge_trans` l " . $join . " ORDER BY $sort $order LIMIT $offset, $limit";
+     $db->sql($sql);
+     $res = $db->getResult();
+
+    $bulkData = array();
+    $bulkData['total'] = $total;
+    $rows = array();
+    $tempRow = array();
+    foreach ($res as $row) {
+        $tempRow = array();
+        $checkbox = '<input type="checkbox" name="enable[]" value="'.$row['id'].'">';
+        $tempRow['id'] = $row['id'];
+        $tempRow['name'] = $row['name'];
+        $tempRow['mobile'] = $row['mobile'];
+        $tempRow['txn_id'] = $row['txn_id'];
+        $tempRow['order_id'] = $row['order_id'];
+        $tempRow['amount'] = $row['amount'];
+        if($row['status']==1)
+        $tempRow['status'] ="<p class='text text-success'>Paid</p>";
+        elseif($row['status']==0)
+        $tempRow['status']="<p class='text text-primary'>Not-Paid</p>";
+        $tempRow['datetime'] = $row['datetime'];
+        $tempRow['column'] = $checkbox;
+        
+        $rows[] = $tempRow;
+    }
+    $bulkData['rows'] = $rows;
+    print_r(json_encode($bulkData));
+}
 $db->disconnect();
 
