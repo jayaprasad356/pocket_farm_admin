@@ -121,10 +121,10 @@ include "header.php";
                     <div class="small-box bg-green">
                         <div class="inner">
                             <h3><?php
-                             $sql = "SELECT SUM(recharge_amount) AS recharge_amount  FROM recharge WHERE status=1 AND DATE(datetime) = '$date'";
+                             $sql = "SELECT SUM(amount) AS amount  FROM  transactions  WHERE type = 'recharge' AND DATE(datetime) = '$date'";
                              $db->sql($sql);
                              $res = $db->getResult();
-                             $totalamount = $res[0]['recharge_amount'];
+                             $totalamount = $res[0]['amount'];
                              echo "₹".$totalamount;
                               ?></h3>
                             <p>Today Recharge Amount</p>
