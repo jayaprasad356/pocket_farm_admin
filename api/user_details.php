@@ -36,6 +36,9 @@ if ($num >= 1) {
     if ($num >= 1) {
         $txn_id = $rec[0]['txn_id'];
         $date = $rec[0]['txn_date'];
+        $old_f_date = $rec[0]['txn_date'];
+        $date = date('d-m-Y', strtotime($old_f_date));
+
         $key = '707029bb-78d4-44b6-9f72-0d7fe80e338b';
             // API endpoint
         $url = 'https://api.ekqr.in/api/check_order_status';
