@@ -105,7 +105,7 @@ $responseArray = json_decode($resp, true);
 $status = $responseArray['status'];
 if($status == true){
     $order_id = $responseArray['data']['order_id'];
-    $sql = "INSERT INTO recharge_trans (`user_id`,`txn_id`,`order_id`,`amount`,`status`,`datetime`) VALUES ($user_id,'$txn_id','$order_id',$amount,0,'$datetime')";
+    $sql = "INSERT INTO recharge_trans (`user_id`,`txn_id`,`order_id`,`amount`,`status`,`txn_date`,`datetime`) VALUES ($user_id,'$txn_id','$order_id',$amount,0,'$date','$datetime')";
     $db->sql($sql);
 
 
