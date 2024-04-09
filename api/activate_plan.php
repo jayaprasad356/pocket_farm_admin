@@ -55,6 +55,12 @@ if (empty($_POST['plan_id'])) {
 $user_id = $db->escapeString($_POST['user_id']);
 $plan_id = $db->escapeString($_POST['plan_id']);
 
+$sql = "SELECT * FROM settings";
+$db->sql($sql);
+$settings = $db->getResult();
+$scratch_card = $settings[0]['scratch_card'];
+
+
 $sql = "SELECT * FROM users WHERE id = $user_id ";
 $db->sql($sql);
 $user = $db->getResult();
@@ -185,6 +191,12 @@ if ($recharge >= $price) {
             $db->sql($sql);
         }
 
+    }
+
+    if ($scratch_card == 1) {
+        $amount = 25;
+        $sql_insert_user_plan = "INSERT INTO scratch_cards (user_id,amount) VALUES ('$user_id','$amount')";
+        $db->sql($sql_insert_user_plan);
     }
 
     $sql_insert_user_plan = "INSERT INTO user_plan (user_id,plan_id,joined_date) VALUES ('$user_id','$plan_id','$date')";
