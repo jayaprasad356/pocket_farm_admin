@@ -42,6 +42,7 @@ if (empty($_POST['key'])) {
     return;
 }
 $datetime = date('Y-m-d H:i:s');
+$date = date('Y-m-d');
 $user_id = $db->escapeString($_POST['user_id']);
 $txn_id = $db->escapeString($_POST['txn_id']);
 $amount = $db->escapeString($_POST['amount']);
