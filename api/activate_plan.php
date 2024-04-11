@@ -196,12 +196,12 @@ if ($recharge >= $price) {
     if ($scratch_card == 1 && $user_id == 4262) {
 
         $price = $plan[0]['price'];
-        $amount = $price;
+        $amount = rand(2,4) / 100 * $price ;
 
         $sql = "UPDATE users SET chances = chances + 1 WHERE id = $user_id";
         $db->sql($sql);
 
-        $sql_insert_user_plan = "INSERT INTO scratch_cards (user_id,amount) VALUES ('$user_id','$amount')";
+        $sql_insert_user_plan = "INSERT INTO scratch_cards (user_id,amount,status) VALUES ('$user_id','$amount',0)";
         $db->sql($sql_insert_user_plan);
     }
 

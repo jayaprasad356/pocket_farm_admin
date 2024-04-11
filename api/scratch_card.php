@@ -48,10 +48,11 @@ if (empty($_POST['scratch_id'])) {
     $db->sql($sql);
     $res= $db->getResult();
     $id = $res[0]['id'];
+    $amount = $res[0]['amount'];
 
     $response['success'] = true;
-    $response['amount'] = rand(20, 50);
-    $response['scratch_id'] = 123;
+    $response['amount'] = $amount;
+    $response['scratch_id'] = $id;
     $response['message'] = "Scratch Card Available";
     print_r(json_encode($response));
 } else {
