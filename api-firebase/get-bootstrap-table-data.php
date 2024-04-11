@@ -1119,9 +1119,9 @@ if (isset($_GET['table']) && $_GET['table'] == 'scratch_cards') {
         $tempRow['mobile'] = $row['mobile'];
         $tempRow['amount'] = $row['amount'];
         if($row['status']==1)
-        $tempRow['status'] ="<p class='text text-success'>Claimbed</p>";
+        $tempRow['status'] ="<p class='text text-success'>Claimed</p>";
         elseif($row['status']==0)
-        $tempRow['status']="<p class='text text-primary'>Not-Claimbed</p>";
+        $tempRow['status']="<p class='text text-primary'>Not-Claimed</p>";
         $rows[] = $tempRow;
     }
     $bulkData['rows'] = $rows;
