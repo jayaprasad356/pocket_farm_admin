@@ -194,7 +194,7 @@ if ($recharge >= $price) {
 
     }
 
-    if ($scratch_card == 1) {
+    if ($scratch_card == 1 && $plan_id != 1 ) {
 
         $price = $plan[0]['price'];
         $amount = rand(1,3) / 100 * $price ;
