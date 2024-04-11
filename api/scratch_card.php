@@ -29,9 +29,22 @@ if (empty($_POST['user_id'])) {
 
 $user_id = $db->escapeString($_POST['user_id']);
 
+
+$sql = "SELECT * FROM users WHERE id='$user_id'";
+$db->sql($sql);
+$res = $db->getResult();
+$chances = $res[0]['chances'];
+
+if ($chances <= 0) {
+    $response['success'] = false;
+    $response['message'] = "Scratch Card Not Available";
+    print_r(json_encode($response));
+    return false;
+}
+
 if (empty($_POST['scratch_id'])) {
 
-    $sql = "SELECT * FROM scratch_cards WHERE user_id = '$user_id'";
+    $sql = "SELECT * FROM scratch_cards WHERE user_id = '$user_id' AND status = 0 ";
     $db->sql($sql);
     $res= $db->getResult();
     $id = $res[0]['id'];
