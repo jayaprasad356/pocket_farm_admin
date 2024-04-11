@@ -189,6 +189,7 @@ if ($recharge >= $price) {
 
             $sql = "INSERT INTO transactions (user_id, amount, datetime, type) VALUES ('$r_id', '$invite_bonus', '$datetime', 'invite_bonus')";
             $db->sql($sql);
+            
         }
 
     }
@@ -196,12 +197,18 @@ if ($recharge >= $price) {
     if ($scratch_card == 1 && $user_id == 4262) {
 
         $price = $plan[0]['price'];
-        $amount = rand(2,4) / 100 * $price ;
+        $amount = rand(1,3) / 100 * $price ;
 
         $sql = "UPDATE users SET chances = chances + 1 WHERE id = $user_id";
         $db->sql($sql);
 
         $sql_insert_user_plan = "INSERT INTO scratch_cards (user_id,amount,status) VALUES ('$user_id','$amount',0)";
+        $db->sql($sql_insert_user_plan);
+
+        $sql = "UPDATE users SET chances = chances + 1 WHERE refer_code = '$referred_by'";
+        $db->sql($sql);
+$r_id
+        $sql_insert_user_plan = "INSERT INTO scratch_cards (user_id,amount,status) VALUES ('$r_id','$amount',0)";
         $db->sql($sql_insert_user_plan);
     }
 
