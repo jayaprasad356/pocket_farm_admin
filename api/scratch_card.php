@@ -65,7 +65,7 @@ if (empty($_POST['scratch_id'])) {
 
     $amount = $res[0]['amount'];
 
-    $sql = "UPDATE users SET balance = balance + $amount, today_income = today_income + $amount, total_income = total_income + $amount WHERE id = '$user_id'";
+    $sql = "UPDATE users SET balance = balance + $amount, today_income = today_income + $amount, total_income = total_income + $amount,chances = chances - 1 WHERE id = '$user_id'";
     $db->sql($sql);
     
     $sql_insert_transaction = "INSERT INTO transactions (`user_id`, `amount`, `datetime`, `type`) VALUES ('$user_id', '$amount', '$datetime', 'scratch_card')";
@@ -73,6 +73,7 @@ if (empty($_POST['scratch_id'])) {
     
     $sql = "UPDATE scratch_cards SET status = 1 WHERE id = '$scratch_id'";
     $db->sql($sql);
+    
 
     $response['success'] = true;
     $response['message'] = "Scratch Card Claimed Successfully";
