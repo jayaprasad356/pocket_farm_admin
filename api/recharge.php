@@ -25,7 +25,7 @@ $user_id = $db->escapeString($_POST['user_id']);
 $recharge_amount = (isset($_POST['recharge_amount']) && $_POST['recharge_amount'] != "") ? $db->escapeString($_POST['recharge_amount']) : "";
 $date = date('Y-m-d');
 $datetime = date('Y-m-d H:i:s');
-function isBetween9AMand9PM() {
+/*function isBetween9AMand9PM() {
     $currentHour = date('H');
     $startTimestamp = strtotime('09:00:00');
     $endTimestamp = strtotime('21:00:00');
@@ -36,7 +36,7 @@ if (!isBetween9AMand9PM()) {
     $response['message'] = "Recharge time morning 09 AM to 09 PM";
     print_r(json_encode($response));
     return false;
-}
+}*/
 
 $sql = "SELECT * FROM users WHERE id = '" . $user_id . "'";
 $db->sql($sql);
