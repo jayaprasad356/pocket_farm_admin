@@ -6,6 +6,29 @@ $fn = new custom_functions;
 
 
 if (isset($_POST['btnUpdate'])) {
+
+        if ($_FILES['offer_image']['size'] != 0 && $_FILES['offer_image']['error'] == 0 && !empty($_FILES['offer_image'])) {
+            //image isn't empty and update the image
+           
+            $extension = pathinfo($_FILES["offer_image"]["name"])['extension'];
+    
+            $result = $fn->validate_image($_FILES["offer_image"]);
+            $target_path = 'upload/images/';
+            
+            $filename = microtime(true) . '.' . strtolower($extension);
+            $full_path = $target_path . "" . $filename;
+            if (!move_uploaded_file($_FILES["offer_image"]["tmp_name"], $full_path)) {
+                echo '<p class="alert alert-danger">Can not upload image.</p>';
+                return false;
+                exit();
+            }
+            if (!empty($old_image)) {
+                unlink($old_image);
+            }
+            $upload_image = 'upload/images/' . $filename;
+            $sql = "UPDATE settings SET `offer_image`='" . $upload_image . "' WHERE id = 1";
+            $db->sql($sql);
+        }
     
     $whatsapp_group = $db->escapeString(($_POST['whatsapp_group']));
     $telegram_channel = $db->escapeString(($_POST['telegram_channel']));
@@ -64,6 +87,7 @@ $res = $db->getResult();
                 <!-- form start -->
                 <form name="delivery_charge" method="post" enctype="multipart/form-data">
                     <div class="box-body">
+                    <input type="hidden" id="old_offer_image" name="old_offer_image"  value="<?= $res[0]['offer_image']; ?>">
                             <div class="row">
                             <div class="col-md-3">
                                     <div class="form-group">
@@ -89,6 +113,13 @@ $res = $db->getResult();
                                         <input type="number" class="form-control" name="max_withdrawal" value="<?= $res[0]['max_withdrawal'] ?>">
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                <div class="col-md-3">
+                                    <label for="exampleInputFile">Offer Image</label> <i class="text-danger asterik">*</i><?php echo isset($error['offer_image']) ? $error['offer_image'] : ''; ?>
+                                    <input type="file" name="offer_image" onchange="readURL(this);" accept="image/png, image/jpeg" id="image" /><br>
+                                    <img id="blah" src="<?php echo $res[0]['offer_image']; ?>" alt="" width="150" height="150" <?php echo empty($res[0]['offer_image']) ? 'style="display: none;"' : ''; ?> />
+                                </div>
+                            </div>
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="">Pay Video</label><br>
@@ -168,4 +199,21 @@ $res = $db->getResult();
             $('#scratch_card').val(0);
         }
     };
+</script>
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#blah')
+                    .attr('src', e.target.result)
+                    .width(150)
+                    .height(150)
+                    .css('display', 'block');
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
 </script>
