@@ -42,6 +42,9 @@ if (isset($_POST['btnCancel']) && isset($_POST['enable'])) {
 
 <section class="content-header">
     <h1>Recharge /<small><a href="home.php"><i class="fa fa-home"></i> Home</a></small></h1>
+     <ol class="breadcrumb">
+        <a class="btn btn-block btn-default" href="add-recharges.php"><i class="fa fa-plus-square"></i> Add New Recharge</a>
+    </ol>
 </section>
 
 <section class="content">
