@@ -53,7 +53,7 @@ $withdrawal_status = $result[0]['withdrawal_status'];
 
 if ($withdrawal_status == 0) {
     $response['success'] = false;
-    $response['message'] = "Withdrawal Corrently Disabled";
+    $response['message'] = "Today Holiday";
     print_r(json_encode($response));
     return false;
 }
