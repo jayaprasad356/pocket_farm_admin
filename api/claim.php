@@ -41,6 +41,21 @@ $user_id = $db->escapeString($_POST['user_id']);
 $plan_id = $db->escapeString($_POST['plan_id']);
 $markets_id = $db->escapeString($_POST['markets_id']);
 
+
+$sql = "SELECT * FROM settings WHERE id=1";
+$db->sql($sql);
+$result = $db->getResult();
+$income_status = $result[0]['income_status'];
+
+
+if ($income_status == 0) {
+    $response['success'] = false;
+    $response['message'] = "Daily Income is Disabled";
+    print_r(json_encode($response));
+    return false;
+}
+
+
 $sql = "SELECT * FROM markets WHERE id = $markets_id ";
 $db->sql($sql);
 $markets = $db->getResult();
