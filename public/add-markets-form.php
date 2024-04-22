@@ -10,24 +10,27 @@ if (isset($_POST['btnAdd'])) {
         $name = $db->escapeString(($_POST['name']));
         $plan_id = $db->escapeString(($_POST['plan_id']));
         $price = $db->escapeString(($_POST['price']));
+        $min_valid_team = $db->escapeString(($_POST['min_valid_team']));
         $error = array();
        
         if (empty($name)) {
             $error['name'] = " <span class='label label-danger'>Required!</span>";
         }
-
         if (empty($plan_id)) {
             $error['plan_id'] = " <span class='label label-danger'>Required!</span>";
         }
         if (empty($price)) {
             $error['price'] = " <span class='label label-danger'>Required!</span>";
         }
+        if (empty($min_valid_team)) {
+            $error['min_valid_team'] = " <span class='label label-danger'>Required!</span>";
+        }
        
        
-       if (!empty($name) && !empty($plan_id) && !empty($price)) 
+       if (!empty($name) && !empty($plan_id) && !empty($price) && !empty($min_valid_team)) 
        {
            
-            $sql_query = "INSERT INTO markets (name,plan_id,price)VALUES('$name','$plan_id','$price')";
+            $sql_query = "INSERT INTO markets (name,plan_id,price,min_valid_team)VALUES('$name','$plan_id','$price','$min_valid_team')";
             $db->sql($sql_query);
             $result = $db->getResult();
             if (!empty($result)) {
@@ -96,6 +99,10 @@ if (isset($_POST['btnAdd'])) {
                                 <div class='col-md-6'>
                                     <label for="exampleInputtitle">price</label> <i class="text-danger asterik">*</i>
                                     <input type="number" class="form-control" name="price" required>
+                                </div>
+                                <div class='col-md-6'>
+                                    <label for="exampleInputtitle">Min Valid Team</label> <i class="text-danger asterik">*</i>
+                                    <input type="number" class="form-control" name="min_valid_team" required>
                                 </div>
                             </div>
                         </div>

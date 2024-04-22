@@ -49,7 +49,7 @@ if ($num >= 1){
 
 }
 
-$sql = "SELECT * FROM markets WHERE plan_id = '$plan_id'";
+$sql = "SELECT * FROM markets WHERE plan_id = '$plan_id' ORDER BY price";
 $db->sql($sql);
 $res= $db->getResult();
 $num = $db->numRows($res);

@@ -965,6 +965,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'markets') {
        $tempRow['products'] = $row['products'];
        $tempRow['name'] = $row['name'];
        $tempRow['price'] = $row['price'];
+       $tempRow['min_valid_team'] = $row['min_valid_team'];
     $tempRow['operate'] = $operate;
     $rows[] = $tempRow;
 }
