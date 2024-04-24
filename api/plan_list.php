@@ -11,14 +11,22 @@ include_once('../includes/crud.php');
 
 $db = new Database();
 $db->connect();
+
 if (empty($_POST['user_id'])) {
     $response['success'] = false;
     $response['message'] = "User ID is Empty";
     print_r(json_encode($response));
     return false;
 }
+if (empty($_POST['category'])) {
+    $response['success'] = false;
+    $response['message'] = "Category is Empty";
+    print_r(json_encode($response));
+    return false;
+}
 
 $user_id = $db->escapeString($_POST['user_id']);
+$category = $db->escapeString($_POST['category']);
 
 $sql = "SELECT * FROM users WHERE id = $user_id ";
 $db->sql($sql);
@@ -31,13 +39,12 @@ if (empty($user)) {
     return false;
 }
 
-
-$sql = "SELECT * FROM plan ORDER BY price";
+$sql = "SELECT * FROM plan WHERE category = '$category' ORDER BY price";
 $db->sql($sql);
-$res= $db->getResult();
+$res = $db->getResult();
 $num = $db->numRows($res);
 
-if ($num >= 1){
+if ($num >= 1) {
     foreach ($res as $row) {
         $temp['id'] = $row['id'];
         $temp['products'] = $row['products'];
@@ -50,18 +57,16 @@ if ($num >= 1){
         $temp['daily_quantity'] = $row['daily_quantity'];
         $temp['num_times'] = $row['num_times'];
         $temp['stock'] = $row['stock'];
+        $temp['category'] = $row['category'];
         $rows[] = $temp;
     }
     $response['success'] = true;
     $response['message'] = "Plan Details Listed Successfully";
     $response['data'] = $rows;
     print_r(json_encode($response));
-}
-else{
+} else {
     $response['success'] = false;
-    $response['message'] = "plan Not found";
+    $response['message'] = "No plans found for this category";
     print_r(json_encode($response));
-
 }
-
-
+?>

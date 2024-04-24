@@ -16,6 +16,7 @@ if (isset($_POST['btnAdd'])) {
         $unit = $db->escapeString(($_POST['unit']));
         $num_times = $db->escapeString(($_POST['num_times']));
         $stock = $db->escapeString(($_POST['stock']));
+        $category = $db->escapeString(($_POST['category']));
         $error = array();
        
         if (empty($products)) {
@@ -60,10 +61,10 @@ if (isset($_POST['btnAdd'])) {
         }
 
         $upload_image = 'upload/images/' . $filename;
-        $sql = "INSERT INTO plan (products,price,daily_quantity,unit,daily_income,monthly_income,invite_bonus,image,num_times,stock) VALUES ('$products','$price', '$daily_quantity','$unit','$daily_income','$monthly_income','$invite_bonus','$upload_image','$num_times','$stock')";
+        $sql = "INSERT INTO plan (products,price,daily_quantity,unit,daily_income,monthly_income,invite_bonus,image,num_times,stock,category) VALUES ('$products','$price', '$daily_quantity','$unit','$daily_income','$monthly_income','$invite_bonus','$upload_image','$num_times','$stock','$category')";
         $db->sql($sql);
     } else {
-            $sql_query = "INSERT INTO plan (products,price,daily_quantity,unit,daily_income,monthly_income,invite_bonus,num_times,stock) VALUES ('$products','$price','$daily_quantity','$unit','$daily_income','$monthly_income','$invite_bonus','$num_times','$stock')";
+            $sql_query = "INSERT INTO plan (products,price,daily_quantity,unit,daily_income,monthly_income,invite_bonus,num_times,stock,category) VALUES ('$products','$price','$daily_quantity','$unit','$daily_income','$monthly_income','$invite_bonus','$num_times','$stock','$category')";
             $db->sql($sql);
         }
             $result = $db->getResult();
@@ -150,26 +151,34 @@ if (isset($_POST['btnAdd'])) {
                         <br>
                         <div class="row">
                             <div class="form-group">
-                                 <div class="col-md-6">
+                                 <div class="col-md-4">
                                     <label for="exampleInputFile">Image</label> <i class="text-danger asterisk">*</i><?php echo isset($error['image']) ? $error['image'] : ''; ?>
                                     <input type="file" name="image" onchange="readURL(this);" accept="image/png, image/jpeg" id="image" required/><br>
                                     <img id="blah" src="#" alt="" style="display: none; max-height: 200px; max-width: 200px;" /> <!-- Adjust max-height and max-width as needed -->
                                  </div>
-                                 <div class='col-md-6'>
+                                 <div class='col-md-4'>
                                     <label for="exampleInputtitle">Unit</label> <i class="text-danger asterik">*</i>
                                     <input type="text" class="form-control" name="unit" required>
                                 </div>
+                                <div class='col-md-4'>
+                                    <label for="exampleInputEmail1">Category</label> <i class="text-danger asterik">*</i><?php echo isset($error['category']) ? $error['category'] : ''; ?>
+                                    <select id='category' name="category" class='form-control'>
+                                    <option value=''>--select--</option>
+                                    <option value='Fruit'>Fruit</option>
+                                      <option value='Vegetable'>Vegetable</option>
+                                    </select>
+                                    </div>
                             </div> 
                         </div> 
                         <br> 
                         <div class="row">
                             <div class="form-group">
-							<div class='col-md-3'>
-                              <label for="">Stock</label><br>
+							 <div class='col-md-3'>
+                               <label for="">Stock</label><br>
                                     <input type="checkbox" id="stock_button" class="js-switch" <?= isset($res[0]['stock']) && $res[0]['stock'] == 1 ? 'checked' : '' ?>>
                                     <input type="hidden" id="stock" name="stock" value="<?= isset($res[0]['stock']) && $res[0]['stock'] == 1 ? 1 : 0 ?>">
                                 </div>
-                            </div>
+                             </div>
 						  </div> 
                         <br>
                     <!-- /.box-body -->

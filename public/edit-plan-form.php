@@ -24,8 +24,9 @@ if (isset($_POST['btnEdit'])) {
 	$invite_bonus = $db->escapeString(($_POST['invite_bonus']));
 	$num_times = $db->escapeString(($_POST['num_times']));
 	$stock = $db->escapeString(($_POST['stock']));
+	$category = $db->escapeString(($_POST['category']));
 	
-		$sql_query = "UPDATE plan SET products='$products',price='$price',daily_quantity='$daily_quantity',daily_income='$daily_income',monthly_income='$monthly_income',invite_bonus='$invite_bonus',unit='$unit',num_times = '$num_times',stock = '$stock' WHERE id =  $ID";
+		$sql_query = "UPDATE plan SET products='$products',price='$price',daily_quantity='$daily_quantity',daily_income='$daily_income',monthly_income='$monthly_income',invite_bonus='$invite_bonus',unit='$unit',num_times = '$num_times',stock = '$stock',category = '$category' WHERE id =  $ID";
 		$db->sql($sql_query);
 		$result = $db->getResult();             
 		if (!empty($result)) {
@@ -152,22 +153,30 @@ if (isset($_POST['btnCancel'])) { ?>
 						 <br>
 						 <div class="row">
                             <div class="form-group">
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <label for="exampleInputFile">Image</label> <i class="text-danger asterik">*</i><?php echo isset($error['image']) ? $error['image'] : ''; ?>
                                     <input type="file" name="image" onchange="readURL(this);" accept="image/png, image/jpeg" id="image" /><br>
                                     <img id="blah" src="<?php echo $res[0]['image']; ?>" alt="" width="150" height="200" <?php echo empty($res[0]['image']) ? 'style="display: none;"' : ''; ?> />
                                 </div>
-                            </div>
-							   <div class="col-md-6">
+							   <div class="col-md-4">
 									<label for="exampleInputEmail1">Unit</label><i class="text-danger asterik">*</i>
 									<input type="text" class="form-control" name="unit" value="<?php echo $res[0]['unit']; ?>">
 								</div>
-						  </div>  
+								<div class='col-md-4'>
+                                <label for="exampleInputEmail1">Category</label> <i class="text-danger asterik">*</i>
+                                    <select id='category' name="category" class='form-control'>
+									<option value=''>--select--</option>
+                                     <option value='Fruit' <?php if ($res[0]['category'] == 'Fruit') echo 'selected'; ?>>Fruit</option>
+                                      <option value='Vegetable' <?php if ($res[0]['category'] == 'Vegetable') echo 'selected'; ?>>Vegetable</option>
+                                    </select>
+                                </div>
+                            </div> 
+						  </div> 
 						  <br>
 						  <div class="row">
                             <div class="form-group">
-							<div class='col-md-3'>
-                              <label for="">Stock</label><br>
+							  <div class='col-md-3'>
+                                <label for="">Stock</label><br>
                                     <input type="checkbox" id="stock_button" class="js-switch" <?= isset($res[0]['stock']) && $res[0]['stock'] == 1 ? 'checked' : '' ?>>
                                     <input type="hidden" id="stock" name="stock" value="<?= isset($res[0]['stock']) && $res[0]['stock'] == 1 ? 1 : 0 ?>">
                                 </div>
