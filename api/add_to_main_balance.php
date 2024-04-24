@@ -34,20 +34,30 @@ $db->sql($sql);
 $res = $db->getResult();
 $num = $db->numRows($res);
 
-
 if ($num == 1) {
     $veg_wallet = $res[0]['veg_wallet']; 
     $fruit_wallet = $res[0]['fruit_wallet'];
 
-    if($wallet_type == 'veg_wallet'){
-       
+    if($wallet_type == 'veg_wallet'){ 
+        if ($veg_wallet < 500) {
+            $response['success'] = false;
+            $response['message'] = "Minimum 500 rs to add";
+            print_r(json_encode($response));
+            return false;
+        }
+
         $sql = "INSERT INTO transactions (`user_id`,`type`,`datetime`,`amount`) VALUES ($user_id,'veg_wallet','$datetime',$veg_wallet)";
         $db->sql($sql);
         $sql = "UPDATE users SET veg_wallet= veg_wallet - $veg_wallet,balance = balance + $veg_wallet  WHERE id=" . $user_id;
         $db->sql($sql);
     }
     if($wallet_type == 'fruit_wallet'){
-        
+        if ($fruit_wallet < 50) {
+            $response['success'] = false;
+            $response['message'] = "Minimum 50 rs to add";
+            print_r(json_encode($response));
+            return false;
+        }
         $sql = "INSERT INTO transactions (`user_id`,`type`,`datetime`,`amount`) VALUES ($user_id,'fruit_wallet','$datetime',$fruit_wallet)";
         $db->sql($sql);
         $sql = "UPDATE users SET fruit_wallet= fruit_wallet - $fruit_wallet,balance = balance + $fruit_wallet  WHERE id=" . $user_id;
