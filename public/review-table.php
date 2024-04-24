@@ -27,6 +27,8 @@
                                     <th  data-field="name" data-sortable="true"> Name</th>
                                     <th  data-field="mobile" data-sortable="true"> Mobile</th>
                                     <th  data-field="image" data-sortable="true">Image</th>
+                                    <th  data-field="status" data-sortable="true">Status</th>
+                                    <th  data-field="datetime" data-sortable="true">DateTime</th>
                                     <th  data-field="operate" data-events="actionEvents">Action</th>
                                 </tr>
                             </thead>

@@ -22,6 +22,8 @@ if (empty($_POST['user_id'])) {
 }
 
 $user_id = $db->escapeString($_POST['user_id']);
+$date = date('Y-m-d');
+$datetime = date('Y-m-d H:i:s');
 
 $sql = "SELECT * FROM users WHERE id = '" . $user_id . "'";
 $db->sql($sql);
@@ -56,7 +58,7 @@ if (empty($user)) {
             return false;
         }
         $upload_image= 'upload/images/' . $filename;
-        $sql = "INSERT INTO review (`user_id`,`image`) VALUES ('$user_id','$upload_image')";
+        $sql = "INSERT INTO review (`user_id`,`image`,`status`,`datetime`) VALUES ('$user_id','$upload_image',0,'$datetime')";
         $db->sql($sql);
         $response["success"]   = true;
         $response["message"] = "Review Screenshot Upload Successfully";

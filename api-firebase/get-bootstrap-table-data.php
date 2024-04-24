@@ -1176,6 +1176,11 @@ foreach ($res as $row) {
         $tempRow['id'] = $row['id'];
         $tempRow['name'] = $row['name'];
         $tempRow['mobile'] = $row['mobile'];
+        if($row['status']==1)
+        $tempRow['status'] ="<p class='text text-success'>Verified</p>";
+        elseif($row['status']==0)
+        $tempRow['status']="<p class='text text-primary'>Not-Verified</p>";
+        $tempRow['datetime'] = $row['datetime'];
         if (!empty($row['image'])) {
             $tempRow['image'] = "<a data-lightbox='category' href='" . $row['image'] . "' data-caption='" . $row['image'] . "'><img src='" . $row['image'] . "' title='" . $row['image'] . "' height='50' /></a>";
         } else {
