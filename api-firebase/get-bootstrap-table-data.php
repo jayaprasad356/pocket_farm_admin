@@ -1173,6 +1173,7 @@ $rows = array();
 $tempRow = array();
 foreach ($res as $row) {
         $operate = ' <a class="text text-danger" href="delete-review.php?id=' . $row['id'] . '"><i class="fa fa-trash"></i>Delete</a>';
+        $checkbox = '<input type="checkbox" name="enable[]" value="'.$row['id'].'">';
         $tempRow['id'] = $row['id'];
         $tempRow['name'] = $row['name'];
         $tempRow['mobile'] = $row['mobile'];
@@ -1187,6 +1188,7 @@ foreach ($res as $row) {
             $tempRow['image'] = 'No Image';
         }
         $tempRow['operate'] = $operate;
+        $tempRow['column'] = $checkbox;
         $rows[] = $tempRow;
     }
     $bulkData['rows'] = $rows;
