@@ -166,8 +166,8 @@ if (isset($_POST['btnCancel'])) { ?>
                                 <label for="exampleInputEmail1">Category</label> <i class="text-danger asterik">*</i>
                                     <select id='category' name="category" class='form-control'>
 									<option value=''>--select--</option>
-                                     <option value='Fruit' <?php if ($res[0]['category'] == 'Fruit') echo 'selected'; ?>>Fruit</option>
-                                      <option value='Vegetable' <?php if ($res[0]['category'] == 'Vegetable') echo 'selected'; ?>>Vegetable</option>
+                                     <option value='fruits' <?php if ($res[0]['category'] == 'fruits') echo 'selected'; ?>>fruits</option>
+                                      <option value='vegetables' <?php if ($res[0]['category'] == 'vegetables') echo 'selected'; ?>>vegetables</option>
                                     </select>
                                 </div>
                             </div> 

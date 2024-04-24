@@ -164,8 +164,8 @@ if (isset($_POST['btnAdd'])) {
                                     <label for="exampleInputEmail1">Category</label> <i class="text-danger asterik">*</i><?php echo isset($error['category']) ? $error['category'] : ''; ?>
                                     <select id='category' name="category" class='form-control'>
                                     <option value=''>--select--</option>
-                                    <option value='Fruit'>Fruit</option>
-                                      <option value='Vegetable'>Vegetable</option>
+                                    <option value='fruits'>fruits</option>
+                                      <option value='vegetables'>vegetables</option>
                                     </select>
                                     </div>
                             </div> 
