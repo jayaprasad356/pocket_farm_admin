@@ -47,6 +47,7 @@ if (isset($_POST['btnEdit'])) {
     $latitude= $db->escapeString($_POST['latitude']);
     $longitude = $db->escapeString($_POST['longitude']);
     $min_withdrawal = $db->escapeString($_POST['min_withdrawal']);
+    $recharge_dialogue = $db->escapeString($_POST['recharge_dialogue']);
 
     $error = array();
 
@@ -67,7 +68,7 @@ if (isset($_POST['btnEdit'])) {
     }
 
     
-            $sql_query = "UPDATE users SET name='$name',mobile = '$mobile',email='$email',age='$age',city='$city',referred_by='$referred_by',refer_code='$refer_code',holder_name='$holder_name', bank='$bank', branch='$branch', ifsc='$ifsc', account_num='$account_num',withdrawal_status = '$withdrawal_status',recharge  = '$recharge ',balance = '$balance',today_income = '$today_income',device_id  = '$device_id',total_income  = '$total_income',state  = '$state',total_recharge  = '$total_recharge',team_size  = '$team_size',valid_team  = '$valid_team',total_assets  = '$total_assets',total_withdrawal  = '$total_withdrawal',team_income  = '$team_income',registered_datetime  = '$registered_datetime',blocked = '$blocked',password = '$password',latitude = '$latitude',longitude = '$longitude',min_withdrawal = '$min_withdrawal' WHERE id = $ID";
+            $sql_query = "UPDATE users SET name='$name',mobile = '$mobile',email='$email',age='$age',city='$city',referred_by='$referred_by',refer_code='$refer_code',holder_name='$holder_name', bank='$bank', branch='$branch', ifsc='$ifsc', account_num='$account_num',withdrawal_status = '$withdrawal_status',recharge  = '$recharge ',balance = '$balance',today_income = '$today_income',device_id  = '$device_id',total_income  = '$total_income',state  = '$state',total_recharge  = '$total_recharge',team_size  = '$team_size',valid_team  = '$valid_team',total_assets  = '$total_assets',total_withdrawal  = '$total_withdrawal',team_income  = '$team_income',registered_datetime  = '$registered_datetime',blocked = '$blocked',password = '$password',latitude = '$latitude',longitude = '$longitude',min_withdrawal = '$min_withdrawal',recharge_dialogue = '$recharge_dialogue' WHERE id = $ID";
             $db->sql($sql_query);
             $update_result = $db->getResult();
     
@@ -289,10 +290,17 @@ if (isset($_POST['btnCancel'])) { ?>
                                     <input type="number" class="form-control" name="min_withdrawal" value="<?php echo $res[0]['min_withdrawal']; ?>">
                                 </div>
                                 <div class="col-md-3">
-                                <div class="form-group">
+                                  <div class="form-group">
                                     <label for="">Blocked</label><br>
                                     <input type="checkbox" id="blocked_button" class="js-switch" <?= isset($res[0]['blocked']) && $res[0]['blocked'] == 1 ? 'checked' : '' ?>>
                                     <input type="hidden" id="blocked" name="blocked" value="<?= isset($res[0]['blocked']) && $res[0]['blocked'] == 1 ? 1 : 0 ?>">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                  <div class="form-group">
+                                    <label for="">Recharge Dialogue</label><br>
+                                    <input type="checkbox" id="recharge_dialogue_button" class="js-switch" <?= isset($res[0]['recharge_dialogue']) && $res[0]['recharge_dialogue'] == 1 ? 'checked' : '' ?>>
+                                    <input type="hidden" id="recharge_dialogue" name="recharge_dialogue" value="<?= isset($res[0]['recharge_dialogue']) && $res[0]['recharge_dialogue'] == 1 ? 1 : 0 ?>">
                                 </div>
                             </div>
                         </div>
@@ -331,6 +339,18 @@ if (isset($_POST['btnCancel'])) { ?>
 
         } else {
             $('#blocked').val(0);
+            }
+    };
+</script>
+<script>
+    var changeCheckbox = document.querySelector('#recharge_dialogue_button');
+    var init = new Switchery(changeCheckbox);
+    changeCheckbox.onchange = function() {
+        if ($(this).is(':checked')) {
+            $('#recharge_dialogue').val(1);
+
+        } else {
+            $('#recharge_dialogue').val(0);
             }
     };
 </script>
