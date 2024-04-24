@@ -47,7 +47,6 @@ $settings = $db->getResult();
 $sql = "SELECT * FROM settings WHERE id=1";
 $db->sql($sql);
 $result = $db->getResult();
-$min_withdrawal = $result[0]['min_withdrawal'];
 $withdrawal_status = $result[0]['withdrawal_status'];
 
 
@@ -63,8 +62,7 @@ $db->sql($sql);
 $res = $db->getResult();
 $balance = $res[0]['balance'];
 $account_num = $res[0]['account_num'];
-
-
+$min_withdrawal = $res[0]['min_withdrawal'];
 
 
 if (!isBetween10AMand6PM()) {

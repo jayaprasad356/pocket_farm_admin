@@ -46,6 +46,7 @@ if (isset($_POST['btnEdit'])) {
     $password= $db->escapeString($_POST['password']);
     $latitude= $db->escapeString($_POST['latitude']);
     $longitude = $db->escapeString($_POST['longitude']);
+    $min_withdrawal = $db->escapeString($_POST['min_withdrawal']);
 
     $error = array();
 
@@ -66,7 +67,7 @@ if (isset($_POST['btnEdit'])) {
     }
 
     
-            $sql_query = "UPDATE users SET name='$name',mobile = '$mobile',email='$email',age='$age',city='$city',referred_by='$referred_by',refer_code='$refer_code',holder_name='$holder_name', bank='$bank', branch='$branch', ifsc='$ifsc', account_num='$account_num',withdrawal_status = '$withdrawal_status',recharge  = '$recharge ',balance = '$balance',today_income = '$today_income',device_id  = '$device_id',total_income  = '$total_income',state  = '$state',total_recharge  = '$total_recharge',team_size  = '$team_size',valid_team  = '$valid_team',total_assets  = '$total_assets',total_withdrawal  = '$total_withdrawal',team_income  = '$team_income',registered_datetime  = '$registered_datetime',blocked = '$blocked',password = '$password',latitude = '$latitude',longitude = '$longitude' WHERE id = $ID";
+            $sql_query = "UPDATE users SET name='$name',mobile = '$mobile',email='$email',age='$age',city='$city',referred_by='$referred_by',refer_code='$refer_code',holder_name='$holder_name', bank='$bank', branch='$branch', ifsc='$ifsc', account_num='$account_num',withdrawal_status = '$withdrawal_status',recharge  = '$recharge ',balance = '$balance',today_income = '$today_income',device_id  = '$device_id',total_income  = '$total_income',state  = '$state',total_recharge  = '$total_recharge',team_size  = '$team_size',valid_team  = '$valid_team',total_assets  = '$total_assets',total_withdrawal  = '$total_withdrawal',team_income  = '$team_income',registered_datetime  = '$registered_datetime',blocked = '$blocked',password = '$password',latitude = '$latitude',longitude = '$longitude',min_withdrawal = '$min_withdrawal' WHERE id = $ID";
             $db->sql($sql_query);
             $update_result = $db->getResult();
     
@@ -282,6 +283,10 @@ if (isset($_POST['btnCancel'])) { ?>
                             <div class="col-md-3">
                                 <label for="exampleInputEmail1">Registered Datetime</label><i class="text-danger asterik">*</i>
                                     <input type="datetime-local" class="form-control" name="registered_datetime" value="<?php echo $res[0]['registered_datetime']; ?>">
+                                </div>
+                                <div class="col-md-3">
+                                <label for="exampleInputEmail1">Min Withdrawal</label><i class="text-danger asterik">*</i>
+                                    <input type="number" class="form-control" name="min_withdrawal" value="<?php echo $res[0]['min_withdrawal']; ?>">
                                 </div>
                                 <div class="col-md-3">
                                 <div class="form-group">
