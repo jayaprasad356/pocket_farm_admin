@@ -42,7 +42,7 @@ if ($num == 1) {
 
     $sql = "INSERT INTO transactions (`user_id`,`type`,`datetime`,`amount`) VALUES ($user_id,'transfer','$datetime','$tranfer_amount')";
     $db->sql($sql);
-    $sql = "UPDATE users SET veg_wallet = veg_wallet - $tranfer_amount, recharge = recharge + $tranfer_amount , total_recharge = total_recharge + $tranfer_amount  WHERE id=" . $user_id;
+    $sql = "UPDATE users SET veg_wallet = veg_wallet - $tranfer_amount, recharge = recharge + $tranfer_amount , total_recharge = total_recharge + $tranfer_amount,recharge_dialogue = 0  WHERE id=" . $user_id;
     $db->sql($sql);
     
     $sql = "SELECT * FROM users WHERE id = '" . $user_id . "'";
