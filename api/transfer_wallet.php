@@ -31,7 +31,7 @@ $num = $db->numRows($res);
 if ($num == 1) {
     $veg_wallet = $res[0]['veg_wallet']; 
     
-    if ($veg_wallet < 0) {
+    if ($veg_wallet < 1) {
         $response['success'] = false;
         $response['message'] = "Insufficient amount";
         print_r(json_encode($response));
