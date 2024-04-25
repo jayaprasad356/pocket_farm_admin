@@ -67,6 +67,19 @@ if (empty($markets)) {
     return false;
 }
 
+$sql = "SELECT * FROM plan WHERE id = $plan_id ";
+$db->sql($sql);
+$plan = $db->getResult();
+
+if (empty($plan)) {
+    $response['success'] = false;
+    $response['message'] = "Plans not found";
+    print_r(json_encode($response));
+    return false;
+}
+
+$category = $plan[0]['category'];
+
 $sql = "SELECT id,referred_by,c_referred_by,d_referred_by,valid_team,valid FROM users WHERE id = $user_id";
 $db->sql($sql);
 $user = $db->getResult();
@@ -143,6 +156,16 @@ if($min_valid_team > $valid_team){
     echo json_encode($response);
     return;
 
+}
+if($category == "vegetables")
+{
+    $sql = "UPDATE users SET veg_wallet = veg_wallet + $daily_income WHERE id = $user_id";
+    $db->sql($sql); 
+}
+if($category == "fruits")
+{
+    $sql = "UPDATE users SET fruit_wallet = fruit_wallet + $daily_income WHERE id = $user_id";
+    $db->sql($sql); 
 }
 
 $sql = "UPDATE user_plan SET claim = 0,income = income + $daily_income WHERE id = $user_plan_id";
