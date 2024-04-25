@@ -30,6 +30,7 @@ $num = $db->numRows($res);
 
 if ($num == 1) {
     $veg_wallet = $res[0]['veg_wallet']; 
+    $valid = $res[0]['valid']; 
     
     if ($veg_wallet < 1) {
         $response['success'] = false;
@@ -37,6 +38,14 @@ if ($num == 1) {
         print_r(json_encode($response));
         return false;
     }
+
+    if ($valid == 0) {
+        $response['success'] = false;
+        $response['message'] = "You are not Valid User";
+        print_r(json_encode($response));
+        return false;
+    }
+    
 
     $tranfer_amount = $veg_wallet;
 
