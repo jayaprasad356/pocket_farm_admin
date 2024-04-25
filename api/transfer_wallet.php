@@ -30,19 +30,28 @@ $num = $db->numRows($res);
 
 if ($num == 1) {
     $veg_wallet = $res[0]['veg_wallet']; 
+    $valid = $res[0]['valid']; 
     
-    if ($veg_wallet < 500) {
+    if ($veg_wallet < 1) {
         $response['success'] = false;
-        $response['message'] = "Insufficient balance. Minimum 500 rs required to add.";
+        $response['message'] = "Insufficient amount";
         print_r(json_encode($response));
         return false;
     }
 
-    $tranfer_amount = 500;
+    if ($valid == 0) {
+        $response['success'] = false;
+        $response['message'] = "You are not Valid User";
+        print_r(json_encode($response));
+        return false;
+    }
+    
+
+    $tranfer_amount = $veg_wallet;
 
     $sql = "INSERT INTO transactions (`user_id`,`type`,`datetime`,`amount`) VALUES ($user_id,'transfer','$datetime','$tranfer_amount')";
     $db->sql($sql);
-    $sql = "UPDATE users SET veg_wallet = veg_wallet - $tranfer_amount, recharge = recharge + $tranfer_amount , total_recharge = total_recharge + $tranfer_amount  WHERE id=" . $user_id;
+    $sql = "UPDATE users SET veg_wallet = veg_wallet - $tranfer_amount, recharge = recharge + $tranfer_amount , total_recharge = total_recharge + $tranfer_amount,recharge_dialogue = 0  WHERE id=" . $user_id;
     $db->sql($sql);
     
     $sql = "SELECT * FROM users WHERE id = '" . $user_id . "'";
