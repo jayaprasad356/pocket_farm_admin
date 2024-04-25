@@ -159,20 +159,20 @@ if($min_valid_team > $valid_team){
 }
 if($category == "vegetables")
 {
-    $sql = "UPDATE users SET veg_wallet = veg_wallet + $daily_income WHERE id = $user_id";
+    $sql = "UPDATE users SET veg_wallet = veg_wallet + $daily_income, today_income = today_income + $daily_income, total_income = total_income + $daily_income WHERE id = $user_id";
     $db->sql($sql); 
 }
 if($category == "fruits")
 {
-    $sql = "UPDATE users SET fruit_wallet = fruit_wallet + $daily_income WHERE id = $user_id";
+    $sql = "UPDATE users SET fruit_wallet = fruit_wallet + $daily_income, today_income = today_income + $daily_income, total_income = total_income + $daily_income WHERE id = $user_id";
     $db->sql($sql); 
 }
 
 $sql = "UPDATE user_plan SET claim = 0,income = income + $daily_income WHERE id = $user_plan_id";
 $db->sql($sql);
 
-$sql = "UPDATE users SET balance = balance + $daily_income, today_income = today_income + $daily_income, total_income = total_income + $daily_income WHERE id = $user_id";
-$db->sql($sql);
+//$sql = "UPDATE users SET balance = balance + $daily_income, today_income = today_income + $daily_income, total_income = total_income + $daily_income WHERE id = $user_id";
+//$db->sql($sql);
 
 $sql_insert_transaction = "INSERT INTO transactions (`user_id`, `amount`, `datetime`, `type`) VALUES ('$user_id', '$daily_income', '$datetime', 'daily_income')";
 $db->sql($sql_insert_transaction);
