@@ -22,12 +22,9 @@ if (isset($_POST['btnAdd'])) {
         if (empty($price)) {
             $error['price'] = " <span class='label label-danger'>Required!</span>";
         }
-        if (empty($min_valid_team)) {
-            $error['min_valid_team'] = " <span class='label label-danger'>Required!</span>";
-        }
        
        
-       if (!empty($name) && !empty($plan_id) && !empty($price) && !empty($min_valid_team)) 
+       if (!empty($name) && !empty($plan_id) && !empty($price)) 
        {
            
             $sql_query = "INSERT INTO markets (name,plan_id,price,min_valid_team)VALUES('$name','$plan_id','$price','$min_valid_team')";
@@ -102,7 +99,7 @@ if (isset($_POST['btnAdd'])) {
                                 </div>
                                 <div class='col-md-6'>
                                     <label for="exampleInputtitle">Min Valid Team</label> <i class="text-danger asterik">*</i>
-                                    <input type="number" class="form-control" name="min_valid_team" required>
+                                    <input type="number" class="form-control" name="min_valid_team">
                                 </div>
                             </div>
                         </div>
