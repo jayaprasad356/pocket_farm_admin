@@ -31,14 +31,14 @@ $num = $db->numRows($res);
 if ($num == 1) {
     $veg_wallet = $res[0]['veg_wallet']; 
     
-    if ($veg_wallet < 500) {
+    if ($veg_wallet < 0) {
         $response['success'] = false;
-        $response['message'] = "Insufficient balance. Minimum 500 rs required to add.";
+        $response['message'] = "Insufficient amount";
         print_r(json_encode($response));
         return false;
     }
 
-    $tranfer_amount = 500;
+    $tranfer_amount = $veg_wallet;
 
     $sql = "INSERT INTO transactions (`user_id`,`type`,`datetime`,`amount`) VALUES ($user_id,'transfer','$datetime','$tranfer_amount')";
     $db->sql($sql);
