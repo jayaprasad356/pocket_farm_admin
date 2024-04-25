@@ -39,7 +39,7 @@ if (empty($user)) {
     return false;
 }
 
-$sql = "SELECT * FROM plan WHERE category = '$category' ORDER BY price";
+$sql = "SELECT * FROM plan WHERE category = '$category' AND stock = 1 ORDER BY price";
 $db->sql($sql);
 $res = $db->getResult();
 $num = $db->numRows($res);
