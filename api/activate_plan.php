@@ -195,16 +195,16 @@ if ($recharge >= $price) {
     }
     if ($plan_id == 8) {
 
-        $bonus = 150;
+        $min_withdrawal = 150;
 
-        $sql = "UPDATE users SET min_withdrawal = min_withdrawal + $bonus WHERE id = '$user_id'";
+        $sql = "UPDATE users SET min_withdrawal = $min_withdrawal WHERE id = '$user_id'";
         $db->sql($sql);
     }
     if ($plan_id == 7) {
 
         $bonus = 50;
 
-        $sql = "UPDATE users SET min_withdrawal = min_withdrawal + $bonus WHERE id = '$user_id'";
+        $sql = "UPDATE users SET min_withdrawal =  $min_withdrawal WHERE id = '$user_id'";
         $db->sql($sql);
     }
 

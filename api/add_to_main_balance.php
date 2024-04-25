@@ -56,7 +56,7 @@ if ($num == 1) {
 
         if (!isBetween10AMand6PM()) {
             $response['success'] = false;
-            $response['message'] = "Transfer time morning 10:00AM to 6PM";
+            $response['message'] = "Add Wallet time morning 10:00AM to 6PM";
             print_r(json_encode($response));
             return false;
         }
