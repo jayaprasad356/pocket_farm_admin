@@ -143,11 +143,28 @@ if (empty($markets)) {
     return;
 }
 $daily_income = $markets[0]['price'];
-// if($income > 300 && $markets_id == 2){
-//     $daily_income = '8';
+if($daily_income >= 10){
+    $sql = "SELECT id FROM user_plan WHERE user_id = '$user_id' AND plan_id = 8";
+    $db->sql($sql);
+    $res= $db->getResult();
+    $num = $db->numRows($res);
+    if ($num == 0) {
+        $response['success'] = false;
+        $response['message'] = "Purchase Strawberry Production to Sell this market";
+        echo json_encode($response);
+        return;
 
-// }
+    }
+    
 
+}
+if($valid == 0){
+    $response['success'] = false;
+    $response['message'] = "Purchase Fruit Production to Sell this market";
+    echo json_encode($response);
+    return;
+
+}
 $min_valid_team = $markets[0]['min_valid_team'];
 
 if($min_valid_team > $valid_team){
