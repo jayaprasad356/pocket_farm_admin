@@ -80,7 +80,17 @@ if ($dayOfWeek == 0 || $dayOfWeek == 7) {
     print_r(json_encode($response));
     return false;
 } 
+$sql = "SELECT id FROM user_plan WHERE user_id = '$user_id' AND plan_id = 8";
+$db->sql($sql);
+$res= $db->getResult();
+$num = $db->numRows($res);
+if ($num == 0) {
+    $response['success'] = false;
+    $response['message'] = "Purchase Strawberry Production for withdrawal";
+    echo json_encode($response);
+    return;
 
+}
 if ($amount >= $min_withdrawal) {
     if ($amount <= $balance) {
         if ($account_num == '') {
