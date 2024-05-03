@@ -100,6 +100,7 @@ $valid_team = $user[0]['valid_team'];
 $total_assets = $user[0]['total_assets'];
 $refer_code = $user[0]['refer_code'];
 $referred_by = $user[0]['referred_by'];
+$min_withdrawal = $user[0]['min_withdrawal'];
 
 $datetime = date('Y-m-d H:i:s');
 
@@ -221,8 +222,8 @@ if ($recharge >= $price) {
 
         $sql = "UPDATE users SET chances = chances + 1 WHERE refer_code = '$referred_by'";
         $db->sql($sql);
-        $sql_insert_user_plan = "INSERT INTO scratch_cards (user_id,amount,status) VALUES ('$r_id','$amount',0)";
-        $db->sql($sql_insert_user_plan);
+      //  $sql_insert_user_plan = "INSERT INTO scratch_cards (user_id,amount,status) VALUES ('$r_id','$amount',0)";
+      //  $db->sql($sql_insert_user_plan);
     }
 
     $sql_insert_user_plan = "INSERT INTO user_plan (user_id,plan_id,joined_date) VALUES ('$user_id','$plan_id','$date')";
