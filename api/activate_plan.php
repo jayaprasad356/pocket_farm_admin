@@ -220,8 +220,8 @@ if ($recharge >= $price) {
         // $sql_insert_user_plan = "INSERT INTO scratch_cards (user_id,amount,status) VALUES ('$user_id','$amount',0)";
         // $db->sql($sql_insert_user_plan);
 
-        $sql = "UPDATE users SET chances = chances + 1 WHERE refer_code = '$referred_by'";
-        $db->sql($sql);
+        // $sql = "UPDATE users SET chances = chances + 1 WHERE refer_code = '$referred_by'";
+        // $db->sql($sql);
       //  $sql_insert_user_plan = "INSERT INTO scratch_cards (user_id,amount,status) VALUES ('$r_id','$amount',0)";
       //  $db->sql($sql_insert_user_plan);
     }
