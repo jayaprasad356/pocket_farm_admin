@@ -63,7 +63,7 @@ $res = $db->getResult();
 $balance = $res[0]['balance'];
 $account_num = $res[0]['account_num'];
 $min_withdrawal = $res[0]['min_withdrawal'];
-
+$referred_by = $res[0]['referred_by'];
 
 if (!isBetween10AMand6PM()) {
     $response['success'] = false;
@@ -91,6 +91,18 @@ if ($num == 0) {
     return;
 
 }
+$sql = "SELECT * FROM `users`u,user_plan up WHERE u.id = up.user_id AND u.referred_by = '$referred_by' AND up.plan_id = 8";
+$db->sql($sql);
+$res= $db->getResult();
+$num = $db->numRows($res);
+if ($num <  2) {
+    $response['success'] = false;
+    $response['message'] = "Invite Two members in Strawberry Production";
+    echo json_encode($response);
+    return;
+
+}
+
 if ($amount >= $min_withdrawal) {
     if ($amount <= $balance) {
         if ($account_num == '') {
