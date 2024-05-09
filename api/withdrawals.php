@@ -57,13 +57,14 @@ if ($withdrawal_status == 0) {
     return false;
 }
 
-$sql = "SELECT * FROM users WHERE id='$user_id'";
+$sql = "SELECT *,DATE(registered_datetime) AS reg_date FROM users WHERE id='$user_id'";
 $db->sql($sql);
 $res = $db->getResult();
 $balance = $res[0]['balance'];
 $account_num = $res[0]['account_num'];
 $min_withdrawal = $res[0]['min_withdrawal'];
 $referred_by = $res[0]['referred_by'];
+$reg_date = $res[0]['reg_date'];
 
 if (!isBetween10AMand6PM()) {
     $response['success'] = false;
@@ -84,7 +85,7 @@ $sql = "SELECT id FROM user_plan WHERE user_id = '$user_id' AND plan_id = 8";
 $db->sql($sql);
 $res= $db->getResult();
 $num = $db->numRows($res);
-if ($num == 0) {
+if ($num == 0 && $reg_date < '2024-05-09') {
     $response['success'] = false;
     $response['message'] = "Purchase Strawberry Production for withdrawal";
     echo json_encode($response);
@@ -95,7 +96,7 @@ $sql = "SELECT * FROM `users`u,user_plan up WHERE u.id = up.user_id AND u.referr
 $db->sql($sql);
 $res= $db->getResult();
 $num = $db->numRows($res);
-if ($num <  2) {
+if ($num <  2 && $reg_date < '2024-05-09') {
     $response['success'] = false;
     $response['message'] = "Invite Two members in Strawberry Production";
     echo json_encode($response);
