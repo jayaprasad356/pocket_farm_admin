@@ -81,24 +81,24 @@ if ($dayOfWeek == 0 || $dayOfWeek == 7) {
     print_r(json_encode($response));
     return false;
 } 
-$sql = "SELECT id FROM user_plan WHERE user_id = '$user_id' AND plan_id = 8";
+$sql = "SELECT id FROM user_plan WHERE user_id = '$user_id' AND plan_id = 10";
 $db->sql($sql);
 $res= $db->getResult();
 $num = $db->numRows($res);
 if ($num == 0 && $reg_date < '2024-05-09') {
     $response['success'] = false;
-    $response['message'] = "Purchase Strawberry Production for withdrawal";
+    $response['message'] = "Purchase Mango Production for withdrawal";
     echo json_encode($response);
     return;
 
 }
-$sql = "SELECT * FROM `users`u,user_plan up WHERE u.id = up.user_id AND u.referred_by = '$referred_by' AND up.plan_id = 8";
+$sql = "SELECT * FROM `users`u,user_plan up WHERE u.id = up.user_id AND u.referred_by = '$referred_by' AND up.plan_id = 10";
 $db->sql($sql);
 $res= $db->getResult();
 $num = $db->numRows($res);
 if ($num <  2 && $reg_date < '2024-05-09') {
     $response['success'] = false;
-    $response['message'] = "Invite Two members in Strawberry Production";
+    $response['message'] = "Invite 1 member in Mango Production";
     echo json_encode($response);
     return;
 

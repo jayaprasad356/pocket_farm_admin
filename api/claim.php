@@ -144,13 +144,13 @@ if (empty($markets)) {
 }
 $daily_income = $markets[0]['price'];
 if($daily_income >= 10){
-    $sql = "SELECT id FROM user_plan WHERE user_id = '$user_id' AND plan_id = 8";
+    $sql = "SELECT id FROM user_plan WHERE user_id = '$user_id' AND plan_id = 10";
     $db->sql($sql);
     $res= $db->getResult();
     $num = $db->numRows($res);
     if ($num == 0) {
         $response['success'] = false;
-        $response['message'] = "Purchase Strawberry Production to Sell this market";
+        $response['message'] = "Purchase Mango Production to Sell this market";
         echo json_encode($response);
         return;
 
