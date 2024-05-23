@@ -28,6 +28,7 @@ if ($num >= 1){
         $temp['min_withdrawal'] = $row['min_withdrawal'];
         $temp['withdrawal_ins'] = $row['withdrawal_ins'];
         $temp['pay_video'] = $row['pay_video'];
+        $temp['add_video'] = $row['add_video'];
         $temp['review_video'] = $row['review_video'];
         $temp['offer_image'] = DOMAIN_URL . $row['offer_image'];
         $temp['pay_gateway'] = $row['pay_gateway'];

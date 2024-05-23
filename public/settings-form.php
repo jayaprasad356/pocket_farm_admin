@@ -35,6 +35,7 @@ if (isset($_POST['btnUpdate'])) {
     $min_withdrawal = $db->escapeString(($_POST['min_withdrawal']));
     $max_withdrawal = $db->escapeString(($_POST['max_withdrawal']));
     $pay_video = $db->escapeString(($_POST['pay_video']));
+    $add_video = $db->escapeString(($_POST['add_video']));
     $pay_gateway = $db->escapeString(($_POST['pay_gateway']));
     $scratch_card = $db->escapeString(($_POST['scratch_card']));
     $withdrawal_status = $db->escapeString(($_POST['withdrawal_status']));
@@ -44,7 +45,7 @@ if (isset($_POST['btnUpdate'])) {
     
 
             $error = array();
-            $sql_query = "UPDATE settings SET whatsapp_group='$whatsapp_group',telegram_channel='$telegram_channel',min_withdrawal='$min_withdrawal',max_withdrawal='$max_withdrawal',pay_video='$pay_video',pay_gateway='$pay_gateway',scratch_card = '$scratch_card',withdrawal_status = '$withdrawal_status',income_status = '$income_status', withdrawal_ins = '$withdrawal_ins',review_video = '$review_video'  WHERE id=1";
+            $sql_query = "UPDATE settings SET whatsapp_group='$whatsapp_group',telegram_channel='$telegram_channel',min_withdrawal='$min_withdrawal',max_withdrawal='$max_withdrawal',pay_video='$pay_video',pay_gateway='$pay_gateway',scratch_card = '$scratch_card',withdrawal_status = '$withdrawal_status',income_status = '$income_status', withdrawal_ins = '$withdrawal_ins',review_video = '$review_video',add_video = '$add_video'  WHERE id=1";
             $db->sql($sql_query);
             $result = $db->getResult();
             if (!empty($result)) {
@@ -126,6 +127,10 @@ $res = $db->getResult();
                             <div class="col-md-3">
                                 <label for="">Review Video</label><br>
                                 <input type="text" class="form-control" name="review_video" value="<?= $res[0]['review_video'] ?>">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="">Add Video</label><br>
+                                <input type="text" class="form-control" name="add_video" value="<?= $res[0]['add_video'] ?>">
                             </div>
                         </div>
                         <br>
