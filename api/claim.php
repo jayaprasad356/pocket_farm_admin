@@ -106,12 +106,12 @@ $d_referred_by = $user[0]['d_referred_by'];
 $valid_team = $user[0]['valid_team'];
 $valid = $user[0]['valid'];
 
-if($valid == 1 && $plan_id == 1){
+/*if($valid == 1 && $plan_id == 1){
     $response['success'] = false;
     $response['message'] = "Due to heavy demand for the free plan, we are unable to provide it to valid users.";
     echo json_encode($response);
     return;
-}
+}*/
 $sql = "SELECT * FROM user_plan WHERE user_id = $user_id AND plan_id = $plan_id ORDER BY claim DESC LIMIT 1";
 $db->sql($sql);
 $user_plan = $db->getResult();
@@ -143,7 +143,7 @@ if (empty($markets)) {
     return;
 }
 $daily_income = $markets[0]['price'];
-if($daily_income >= 10){
+/*if($daily_income >= 10){
     $sql = "SELECT id FROM user_plan WHERE user_id = '$user_id' AND plan_id = 10";
     $db->sql($sql);
     $res= $db->getResult();
@@ -155,15 +155,12 @@ if($daily_income >= 10){
         return;
 
     }
-    
-
 }
 if($valid == 0){
     $response['success'] = false;
     $response['message'] = "Purchase Fruit Production to Sell this market";
     echo json_encode($response);
     return;
-
 }
 $min_valid_team = $markets[0]['min_valid_team'];
 
@@ -173,7 +170,7 @@ if($min_valid_team > $valid_team){
     echo json_encode($response);
     return;
 
-}
+}*/
 if($category == "vegetables")
 {
     $sql = "UPDATE users SET veg_wallet = veg_wallet + $daily_income, today_income = today_income + $daily_income, total_income = total_income + $daily_income WHERE id = $user_id";
