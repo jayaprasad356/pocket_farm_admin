@@ -47,9 +47,9 @@ if ($num == 1) {
     $fruit_wallet = $res[0]['fruit_wallet'];
 
     if($wallet_type == 'veg_wallet'){ 
-        if ($veg_wallet < 500) {
+        if ($veg_wallet < 50) {
             $response['success'] = false;
-            $response['message'] = "Minimum 500 rs to add";
+            $response['message'] = "Minimum 50 rs to add";
             print_r(json_encode($response));
             return false;
         }
